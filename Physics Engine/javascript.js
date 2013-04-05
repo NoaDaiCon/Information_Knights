@@ -4,8 +4,8 @@ function f()
 		var canvas = document.getElementById("canvas"),
 		ctx = canvas.getContext("2d"),
 
-		width = 600,
-		height = 400,
+		width = 1000,
+		height = 600,
 		
 		player = {
 		x : 100,
@@ -37,13 +37,15 @@ function f()
 		friction = 0.9;
 		gravity = 2;
 		frameSkipper = 0;
-		animation = "main walk cycle000";
+		animation = "images/main walk cycle000";
 		falling = false;
 		colour = "blue";
 		deadTimer = 0;
 		curTime = Date.now()
 		checkSecond = Date.now();
 		deltaTime2 = 1;
+		backgroundIndex = 1;
+		backgroundSlower = 1;
 		
 		image = new Image();
 		xPos = 0;
@@ -111,11 +113,12 @@ function f()
 		
 		hitbox.x = player.x + 55;
 		hitbox.y = player.y+25;
-		object.x = object.speed+500;
+		object.x -= object.speed;
 			
 		ctx.clearRect(0,0,width,height);
 		ctx.fillStyle = "red";
 		
+		drawBackground();
 		ctx.fillStyle = colour;
 		ctx.fillRect(object.x, object.y, object.width, object.height);
 		walk();
@@ -134,15 +137,16 @@ function f()
 	{
 		if(frameSkipper >= 4)
 		{
-		xPos += player.width;
 		index++;
 		frameSkipper = 0;
+		}
+		if(dead)
+		{
+			animation = "dead";
 		}
 		frameSkipper++;
 		if(index >= numFrames)
 		{
-			xPos = 0;
-			yPos = 0;
 			index = 0;
 		}
 		if(player.dead)
@@ -203,7 +207,6 @@ function f()
 				else if((hitbox.y+hitbox.height)>object.y)
 				{
 					colour = "black";
-					animation = "dead";
 					player.width = 350;
 					player.height = 160;
 					player.y = height - player.height;
@@ -239,38 +242,66 @@ function f()
 	{
 		imageArray = [];
 		var counter = 1;
-		animation = "main walk cycle000";
-		for(var i = 0; i < 20; i++)
+		for(var i = 0; i < 7; i++)
 		{
 			if(i < 7)
 			{
+				animation = "images/main walk cycle000";
 				imageArray["walk"+(counter)] = new Image();
-				imageArray["walk"+(counter)].src = "images/"+animation+(counter)+".PNG";
+				imageArray["walk"+(counter)].src = animation+(counter)+".PNG";
 			}
-			else
+			if(i < 6)
 			{
-				if(i >= 13)
-				{
-					animation = "Dead000";
-					imageArray["dead"+(counter)] = new Image();
-					imageArray["dead"+(counter)].src = "images/"+animation+(counter)+".PNG";
-				}
-				else
-				{
-					animation = "Jump000";
-					imageArray["jump"+(counter)] = new Image();
-					imageArray["jump"+(counter)].src = "images/"+animation+(counter)+".PNG";
-				}
+				animation = "images/Dead000";
+				imageArray["dead"+(counter)] = new Image();
+				imageArray["dead"+(counter)].src = animation+(counter)+".PNG";
+			}
+			if(i < 5)
+			{
+				animation = "images/b1000";
+				imageArray["b1"+(counter)] = new Image();
+				imageArray["b1"+(counter)].src = animation+(counter)+".PNG";
+				
+				animation = "images/b2000";
+				imageArray["b2"+(counter)] = new Image();
+				imageArray["b2"+(counter)].src = animation+(counter)+".PNG";
+			
+			}
+			if (i < 6)
+			{
+				animation = "images/Jump000";
+				imageArray["jump"+(counter)] = new Image();
+				imageArray["jump"+(counter)].src = animation+(counter)+".PNG";
 			}
 			counter++;
-			if(i == 6 || i == 13)
-			{
-				counter = 1;
-			}
 		}
+	}
+	function drawBackground()
+	{
+		animation = "b1";
+		ctx.drawImage(imageArray[animation+(backgroundIndex)],  0, 0);
+		animation = "b2";
+		ctx.drawImage(imageArray[animation+(backgroundIndex)],  xPos, 0);
+		ctx.drawImage(imageArray[animation+(backgroundIndex)],  xPos+1000, 0);
+		if(backgroundSlower == 6)
+		{
+		parallax();
+		backgroundIndex++;
+		backgroundSlower = 1;
+		}
+		if(backgroundIndex == 6)
+		{
+			backgroundIndex = 1;
+		}
+		backgroundSlower++;
+
 	}
 	function parallax()
 	{
-		
+		xPos-= 2;
+		if(xPos <= -1000)
+		{
+		 xPos = 0;
+		}
 	}
 }
