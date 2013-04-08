@@ -71,3 +71,15 @@ function getAnswer()
 {
 	return(ans);
 }
+
+function checkAnswer(input)
+{
+	if(input==ans)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
