@@ -57,6 +57,7 @@ function f()
 	canvas.height = height;
 	document.body.appendChild(canvas);
 	loadImages();
+	generate();
 	update();	
 	
 	function update()
@@ -75,13 +76,7 @@ function f()
 		if (keys[38] || keys[32])
 		{
 		//u[p
-			
-			if(!player.jumping)
-			{
-				player.jumping = true;
-				player.velY = -player.jump;
-				index = 1;
-			}
+			jump();			
 		}
 		if (keys[39])
 		{
@@ -122,6 +117,7 @@ function f()
 		ctx.fillStyle = colour;
 		ctx.fillRect(object.x, object.y, object.width, object.height);
 		walk();
+		fps();
 		requestAnimationFrame(update);
 	}
 	
@@ -132,6 +128,48 @@ function f()
 	document.body.addEventListener("keyup", function(e){
 		keys[e.keyCode] = false;
 	});
+	canvas.addEventListener("mousedown", function(e)
+	{
+		var x = e.clientX;
+		var y = e.clientY;
+		var ans = getAnsNum();
+		if(y <= 100)
+		{
+			if(x <= width/4 && ans == 1)
+			{
+				alert("gaucjm fucjk");
+				generate();
+			}
+			else if(x > width/4 && x < width/2 && ans == 2)
+			{
+				alert("gaucjm fucjk");
+				generate();
+			}
+			else if(x > width/2 && x <= 3*width/4 && ans == 3)
+			{
+				alert("gaucjm fucjk");
+				generate();
+			}
+			else if(x > 3*width/4 && x <= width && ans == 4)
+			{
+				alert("gaucjm fucjk");
+				generate();
+			}
+			else
+			{
+				alert("ALRT: ur fagl ol");
+			}
+		}
+		if(y>=height-50 && x <= 100)
+		{
+		window.location = "../index.html";
+		}
+			keys[38] = true;
+	});
+	canvas.addEventListener("mouseup", function(e){
+		keys[38] = false;
+	});
+	
 	
 	function walk()
 	{
@@ -166,16 +204,6 @@ function f()
 			}
 		}
 		ctx.drawImage(imageArray[animation+(index+1)], 0, 0, player.width, player.height, player.x+20, player.y+10, player.width, player.height);
-		prevTime = curTime;
-		curTime = Date.now();
-		deltaTime = curTime - prevTime;
-		if(curTime - 1000 >= checkSecond)
-		{
-			checkSecond = curTime;
-			deltaTime2 = checkSecond - prevTime;
-			ctx.fillStyle = "12px, Black";
-		}
-			ctx.fillText(1000/deltaTime2, 100, 100);
 	}
 	function processCollisions()
 		{
@@ -303,5 +331,37 @@ function f()
 		{
 		 xPos = 0;
 		}
+	}
+	function jump()
+	{
+		if(!player.jumping)
+		{
+			player.jumping = true;
+			player.velY = -player.jump;
+			index = 1;
+		}
+	}
+	function fps()
+	{
+		prevTime = curTime;
+		curTime = Date.now();
+		deltaTime = curTime - prevTime;
+		if(curTime - 1000 >= checkSecond)
+		{
+			checkSecond = curTime;
+			deltaTime2 = checkSecond - prevTime;
+			ctx.fillStyle = "12px, Black";
+		}
+		ctx.fillText(1000/deltaTime2, 100, 100);
+		ctx.fillStyle = "black";
+		ctx.fillRect(0,height-50,100,50);
+		ctx.fillStyle = "red";
+		ctx.fillRect(0,0,width/4,100);
+		ctx.fillStyle = "blue";
+		ctx.fillRect(0+width/4,0,width/4,100);
+		ctx.fillStyle = "green";
+		ctx.fillRect(0+width/2,0,width/4,100);
+		ctx.fillStyle = "pink";
+		ctx.fillRect(3*width/4,0,width/4,100);
 	}
 }

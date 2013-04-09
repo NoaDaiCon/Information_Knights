@@ -3,13 +3,13 @@ var first;
 var sec;
 var type
 var ans;
-
+var ansNum;
 function generate()
 {
 	first=Math.floor(Math.random()*101);
 	sec=Math.floor(Math.random()*101);
 	type=Math.floor(Math.random()*4);	
-	
+	ansNum=Math.floor((Math.random()*4)+1);
 	if(type==0)
 	{
 		ans=first+sec;
@@ -41,22 +41,22 @@ function getQuestion()
 	
 	if(type==0)
 	{
-		return(first + "+" + sec + "=");
+		return("What is " +first + " + " + sec );
 	}
 	
 	else if(type==1)
 	{
-		return(first + "-" + sec + "=");
+		return("What is " + first + " - " + sec );
 	}
 	
 	else if(type==2)
 	{
-		return(first + "*" + sec + "=");
+		return("What is " +first + " x " + sec );
 	}
 	
 	else if(type==3)
 	{
-		return(first + "/" + sec + "=");
+		return("What is " +first + " ÷ " + sec );
 	}
 	
 	else
@@ -70,6 +70,10 @@ function getQuestion()
 function getAnswer()
 {
 	return(ans);
+}
+function getAnsNum()
+{
+	return(ansNum);
 }
 
 function checkAnswer(input)
