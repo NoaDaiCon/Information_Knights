@@ -6,28 +6,44 @@ var ans;
 var ansNum;
 function generate()
 {
-	first=Math.floor(Math.random()*101);
-	sec=Math.floor(Math.random()*101);
+
 	type=Math.floor(Math.random()*4);	
 	ansNum=Math.floor((Math.random()*4)+1);
 	if(type==0)
 	{
+		first=Math.floor(Math.random()*101);
+		sec=Math.floor(Math.random()*101);
 		ans=first+sec;
 	}
 	
 	else if(type==1)
 	{
+		first=Math.floor(Math.random()*101);
+		sec=Math.floor(Math.random()*101);
+		if(sec > first)
+		{
+			var temp = first;
+			first = sec;
+			sec = temp;
+		}
 		ans=first-sec;
 	}
 	
 	else if(type==2)
 	{
+		first=Math.floor(Math.random()*10);
+		sec=Math.floor(Math.random()*10);
 		ans=first*sec;
 	}
 	
 	else if(type==3)
 	{
-		ans=first/sec;
+		first=Math.floor(Math.random()*10);
+		sec=Math.floor((Math.random()*9)+1);
+		first = first*sec;
+		
+		
+		ans=Math.floor(first/sec);
 	}
 	
 	else
@@ -56,7 +72,7 @@ function getQuestion()
 	
 	else if(type==3)
 	{
-		return("What is " +first + " ÷ " + sec );
+		return("What is " +first + " / " + sec );
 	}
 	
 	else

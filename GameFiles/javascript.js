@@ -21,11 +21,11 @@ function f()
 		};
 		
 		object = {
-		x : 500,
+		x : width,
 		y : height-100,
 		width : 100,
 		height : 100,
-		speed: 15
+		speed: 1
 		}
 		hitbox = {
 		x : player.x + 55,
@@ -46,6 +46,7 @@ function f()
 		deltaTime2 = 1;
 		backgroundIndex = 1;
 		backgroundSlower = 1;
+		showUI = true;
 		
 		image = new Image();
 		xPos = 0;
@@ -58,6 +59,7 @@ function f()
 	document.body.appendChild(canvas);
 	loadImages();
 	generate();
+	answer = getAnsNum();
 	update();	
 	
 	function update()
@@ -89,7 +91,6 @@ function f()
 				player.velX--;
 			}
 		}
-		
 		player.velX *= friction;
 		player.velY += gravity;
 		
@@ -124,6 +125,17 @@ function f()
 	document.body.addEventListener("keydown", function(e)
 	{
 		keys[e.keyCode] = true;
+		if (keys[85])
+		{
+			if(showUI)
+			{
+				showUI = false;
+			}
+			else
+			{
+				showUI = true;
+			}
+		}
 	});
 	document.body.addEventListener("keyup", function(e){
 		keys[e.keyCode] = false;
@@ -132,32 +144,36 @@ function f()
 	{
 		var x = e.clientX;
 		var y = e.clientY;
-		var ans = getAnsNum();
+		answer = getAnsNum();
 		if(y <= 100)
 		{
-			if(x <= width/4 && ans == 1)
+			if(x <= width/4 && answer == 1)
 			{
-				alert("gaucjm fucjk");
+				alert("YOU ARE SUPER PLAYER");
 				generate();
+				answer = getAnsNum();
 			}
-			else if(x > width/4 && x < width/2 && ans == 2)
+			else if(x > width/4 && x < width/2 && answer == 2)
 			{
-				alert("gaucjm fucjk");
+				alert("YOU ARE SUPER PLAYER");
 				generate();
+				answer = getAnsNum();
 			}
-			else if(x > width/2 && x <= 3*width/4 && ans == 3)
+			else if(x > width/2 && x <= 3*width/4 && answer == 3)
 			{
-				alert("gaucjm fucjk");
+				alert("YOU ARE SUPER PLAYER");
 				generate();
+				answer = getAnsNum();
 			}
-			else if(x > 3*width/4 && x <= width && ans == 4)
+			else if(x > 3*width/4 && x <= width && answer == 4)
 			{
-				alert("gaucjm fucjk");
+				alert("YOU ARE SUPER PLAYER");
 				generate();
+				answer = getAnsNum();
 			}
 			else
 			{
-				alert("ALRT: ur fagl ol");
+				alert("ALRT: LOSER");
 			}
 		}
 		if(y>=height-50 && x <= 100)
@@ -321,7 +337,7 @@ function f()
 		{
 			backgroundIndex = 1;
 		}
-		backgroundSlower++;
+		backgroundPoopSlower++;
 
 	}
 	function parallax()
@@ -353,15 +369,37 @@ function f()
 			ctx.fillStyle = "12px, Black";
 		}
 		ctx.fillText(1000/deltaTime2, 100, 100);
-		ctx.fillStyle = "black";
-		ctx.fillRect(0,height-50,100,50);
-		ctx.fillStyle = "red";
-		ctx.fillRect(0,0,width/4,100);
-		ctx.fillStyle = "blue";
-		ctx.fillRect(0+width/4,0,width/4,100);
-		ctx.fillStyle = "green";
-		ctx.fillRect(0+width/2,0,width/4,100);
-		ctx.fillStyle = "pink";
-		ctx.fillRect(3*width/4,0,width/4,100);
+		if(showUI)
+		{
+			ctx.fillStyle = "black 20px";
+			ctx.fillRect(0,height-50,100,50);
+			ctx.fillText(getQuestion(), width/2, height-100);
+			ctx.fillStyle = "red";
+			ctx.fillRect(0,0,width/4,100);
+			
+			ctx.fillStyle = "blue";
+			if(answer == 1)
+			{
+				ctx.fillText(getAnswer(),25, 25);
+			}
+			ctx.fillRect(0+width/4,0,width/4,100);
+			ctx.fillStyle = "green";
+			if(answer == 2)
+			{
+				ctx.fillText(getAnswer(),25+width/4, 25);
+			}
+			ctx.fillRect(0+width/2,0,width/4,100);
+			ctx.fillStyle = "pink";
+			if(answer == 3)
+			{
+				ctx.fillText(getAnswer(),25+width/2, 25);
+			}
+			ctx.fillRect(3*width/4,0,width/4,100);
+			if(answer == 4)
+			{
+				ctx.fillStyle = "black";
+				ctx.fillText(getAnswer(),25+3*width/4, 25);
+			}
+		}
 	}
 }
