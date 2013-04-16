@@ -1,8 +1,8 @@
-var ques = new array();
-var ans = new array();
+var ques = new Array();
+var ans = new Array();
 var random;
 
-function generate()
+function generateScience()
 {
 	generateQuestions();
 	generateAnswers();
