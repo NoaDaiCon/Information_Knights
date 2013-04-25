@@ -13,7 +13,7 @@ function f()
 		width : 225,
 		height : 350,
 		speed: 1000,
-		jump : 30,
+		jump : 10,
 		velX: 0,
 		velY: 0,
 		dead : false,
@@ -22,9 +22,9 @@ function f()
 		
 		object = {
 		x : width,
-		y : height-100,
-		width : 100,
-		height : 100,
+		y : height-400,
+		width : 200,
+		height : 400,
 		speed: 1
 		}
 		hitbox = {
@@ -47,6 +47,11 @@ function f()
 		backgroundIndex = 1;
 		backgroundSlower = 1;
 		showUI = true;
+		runonce = false;
+		shake = 0;
+		collision = false;
+		correctAnswers = 0;
+		wrongAnswers = 0;
 		
 		image = new Image();
 		xPos = 0;
@@ -106,17 +111,15 @@ function f()
 		player.y += player.velY;
 		
 		processCollisions();
-		
+				
 		hitbox.x = player.x + 55;
 		hitbox.y = player.y+25;
-		object.x -= object.speed;
 			
 		ctx.clearRect(0,0,width,height);
 		ctx.fillStyle = "red";
 		
 		drawBackground();
 		ctx.fillStyle = colour;
-		ctx.fillRect(object.x, object.y, object.width, object.height);
 		walk();
 		fps();
 		requestAnimationFrame(update);
@@ -150,29 +153,35 @@ function f()
 			if(x <= width/4 && answer == 1)
 			{
 				alert("YOU ARE SUPER PLAYER");
+				correctAnswers++;
+				object.x = width+object.width;
 				generate();
 				answer = getAnsNum();
 			}
 			else if(x > width/4 && x < width/2 && answer == 2)
 			{
 				alert("YOU ARE SUPER PLAYER");
+				correctAnswers++;
 				generate();
 				answer = getAnsNum();
 			}
 			else if(x > width/2 && x <= 3*width/4 && answer == 3)
 			{
 				alert("YOU ARE SUPER PLAYER");
+				correctAnswers++;
 				generate();
 				answer = getAnsNum();
 			}
 			else if(x > 3*width/4 && x <= width && answer == 4)
 			{
 				alert("YOU ARE SUPER PLAYER");
+				correctAnswers++;
 				generate();
 				answer = getAnsNum();
 			}
 			else
 			{
+				wrongAnswers++;
 				alert("ALRT: LOSER");
 			}
 		}
@@ -219,27 +228,35 @@ function f()
 				}
 			}
 		}
-		ctx.drawImage(imageArray[animation+(index+1)], 0, 0, player.width, player.height, player.x+20, player.y+10, player.width, player.height);
+		ctx.drawImage(imageArray["p2"], player.x+20+shake, player.y-30, player.width, player.height);
+		if(player.dead)
+		{
+			ctx.drawImage(imageArray["g1"], object.x + shake, object.y -150 + yPos*80, object.width, object.height );
+		}
+		else
+		{	
+			ctx.drawImage(imageArray["g1"], object.x + shake, object.y -50 + yPos, object.width, object.height );
+		}
 	}
 	function processCollisions()
 		{
-			var collision = false;
+			collision = false;
 			
-			if(player.x >= width-player.width)
+			if(player.x >= width - player.width)
 			{
-				player.x = width-player.width;
+				player.x = width - player.width;
 			}
 			else if(player.x <= 0)
 			{
 				player.x = 0;
 			}
-			if(player.y >= height-player.height)
+			if(player.y >= height - player.height)
 			{
 				player.y = height - player.height;
 				player.jumping = false;
 			}
 			
-			if((hitbox.x+hitbox.width)>=(object.x)&&hitbox.x<=(object.x+object.width))
+			if((hitbox.x+hitbox.width) >= (object.x) && hitbox.x <= (object.x+object.width))
 			{
 				if((hitbox.y+hitbox.height)<=object.y+15&&hitbox.y+hitbox.height>=object.y && falling)
 				{
@@ -250,6 +267,7 @@ function f()
 				}
 				else if((hitbox.y+hitbox.height)>object.y)
 				{
+					collision = true;
 					colour = "black";
 					player.width = 350;
 					player.height = 160;
@@ -265,7 +283,7 @@ function f()
 		}
 	function dead()
 	{
-		if(deadTimer >= 60)
+		if(!collision)
 		{
 			player.dead = false;
 			player.width = 225;
@@ -280,11 +298,21 @@ function f()
 			index = 0;
 		}
 		deadTimer++;
-		ctx.drawImage(imageArray[animation+(index+1)], 0, 0, player.width, player.height, player.x+20, player.y+10, player.width, player.height);
+		//ctx.drawImage(imageArray[animation+(index+1)],player.x+20, player.y+10);
 	}
-	function loadImages()
+	function loadImages(player, background, guardian)
 	{
 		imageArray = [];
+		
+		imageArray["b1a"] = new Image();
+		imageArray["b1a"].src = "images2/b1.PNG";
+		
+		imageArray["p2"] = new Image();
+		imageArray["p2"].src = "images2/p2.PNG";
+		
+		imageArray["g1"] = new Image();
+		imageArray["g1"].src = "images2/g1.PNG";
+		
 		var counter = 1;
 		for(var i = 0; i < 7; i++)
 		{
@@ -323,10 +351,10 @@ function f()
 	function drawBackground()
 	{
 		animation = "b1";
-		ctx.drawImage(imageArray[animation+(backgroundIndex)],  0, 0);
-		animation = "b2";
-		ctx.drawImage(imageArray[animation+(backgroundIndex)],  xPos, 0);
-		ctx.drawImage(imageArray[animation+(backgroundIndex)],  xPos+1000, 0);
+		ctx.drawImage(imageArray["b1a"],  0, 0+yPos);
+	//	animation = "b2";
+		//ctx.drawImage(imageArray[animation+(backgroundIndex)],  xPos, 0);
+		//ctx.drawImage(imageArray[animation+(backgroundIndex)],  xPos+1000, 0);
 		if(backgroundSlower == 6)
 		{
 		parallax();
@@ -337,7 +365,7 @@ function f()
 		{
 			backgroundIndex = 1;
 		}
-		backgroundPoopSlower++;
+		backgroundSlower++;
 
 	}
 	function parallax()
@@ -352,7 +380,7 @@ function f()
 	{
 		if(!player.jumping)
 		{
-			player.jumping = true;
+			player.jumping = false;
 			player.velY = -player.jump;
 			index = 1;
 		}
@@ -367,6 +395,36 @@ function f()
 			checkSecond = curTime;
 			deltaTime2 = checkSecond - prevTime;
 			ctx.fillStyle = "12px, Black";
+		}
+		if(curTime - 500 >= checkSecond)
+		{
+			yPos = 0;
+			if(!runonce)
+			{
+				object.x -= 40;
+				runonce = true;
+			}
+			if(shake == 0)
+			{
+				shake = 1; 
+			}
+			else
+			{
+				shake = 0;
+			}
+		}
+		else
+		{
+			if(shake == 0)
+			{
+				shake = 1; 
+			}
+			else
+			{
+				shake = 0;
+			}
+			runonce = false;
+			yPos = 1;
 		}
 		ctx.fillText(1000/deltaTime2, 100, 100);
 		if(showUI)
