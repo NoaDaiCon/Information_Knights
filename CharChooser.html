@@ -1,0 +1,85 @@
+<html>
+
+<head>
+	<script src="GameFiles/CharChooser.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="Scripts/jquery.mobile-1.3.0.min.css"/>
+	<link rel="stylesheet" href="Scripts/style.css"/>
+	<script src="Scripts/jquery-1.9.1.js"></script>
+	<script src="Scripts/jquery.mobile-1.3.0.js"></script>
+	<script src="Scripts/GenerateMath.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+	function color(x, y)
+	{
+		
+		if(x.bgColor=='#ffffff')
+			{
+				un.bgColor='#ffffff';
+				deux.bgColor='#ffffff';
+				trois.bgColor='#ffffff';
+				quatre.bgColor='#ffffff';
+				cinq.bgColor='#ffffff';
+				sice.bgColor='#ffffff';
+				x.bgColor='#009900';
+				choose(y);
+			}
+		else
+			{
+				x.bgColor='#ffffff';
+				init();
+			}
+	}
+	</script>
+</head>
+
+<body>
+	
+	<table align="center">
+		<tr>
+			<td colspan="3" align="center">
+				<h1> 
+					Choose a Character
+				</h1>
+			</td>	
+		</tr>
+		<tr>
+			<td id="one" onClick="color(un, 1)">
+				<img src="GameFiles/images2/p1.png" height="250" width="250">
+			</td>
+			<td id="two" onClick="color(deux, 2)">
+				<img src="GameFiles/images2/p2.png" height="250" width="250">
+			</td>
+			<td id="three" onClick="color(trois, 3)">
+				<img src="GameFiles/images2/p3.png" height="250" width="250">
+			</td>
+		</tr>
+		<tr>
+			<td id="four" onClick="color(quatre, 4)">
+				<img src="GameFiles/images2/p4.png" height="250" width="250">
+			</td>
+			<td id="five" onClick="color(cinq, 5)">
+				<img src="GameFiles/images2/p5.png" height="250" width="250">
+			</td>
+			<td id="six" onClick="color(sice, 6)">
+				<img src="GameFiles/images2/p6.png" height="250" width="250">
+			</td>
+		</tr>
+		<tr>
+			<td colspan = "3" align = "center">
+				<a href="GameFiles/main.html" rel="external" data-role="button" data-transition="flip"> Play </a>
+		</tr>
+	</table>
+		
+		<script type="text/javascript">
+			var un = document.getElementById("one");
+			var deux = document.getElementById("two");
+			var trois = document.getElementById("three");
+			var quatre = document.getElementById("four");
+			var cinq = document.getElementById("five");
+			var sice = document.getElementById("six");
+			init();
+		</script>
+</body>
+
+
+</html>

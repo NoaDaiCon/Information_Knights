@@ -9,6 +9,7 @@ function generate()
 
 	type=Math.floor(Math.random()*4);	
 	ansNum=Math.floor((Math.random()*4)+1);
+	
 	if(type==0)
 	{
 		first=Math.floor(Math.random()*101);
@@ -87,9 +88,53 @@ function getAnswer()
 {
 	return(ans);
 }
-function getAnsNum()
+
+function getAns1()
 {
-	return(ansNum);
+	if(ansNum == 1)
+	{
+		return(ansNum);
+	}
+	else
+	{
+		return Math.floor(Math.random()*101);
+	}
+}
+
+function getAns2()
+{
+	if(ansNum == 2)
+	{
+		return(ansNum);
+	}
+	else
+	{
+		return Math.floor(Math.random()*101);
+	}
+}
+
+function getAns3()
+{
+	if(ansNum == 3)
+	{
+		return(ansNum);
+	}
+	else
+	{
+		return Math.floor(Math.random()*101);
+	}
+}
+
+function getAns4()
+{
+	if(ansNum == 4)
+	{
+		return(ansNum);
+	}
+	else
+	{
+		return Math.floor(Math.random()*101);
+	}
 }
 
 function checkAnswer(input)
