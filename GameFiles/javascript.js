@@ -52,6 +52,11 @@ function f()
 		collision = false;
 		correctAnswers = 0;
 		wrongAnswers = 0;
+		health = 3;
+		level = 1;
+		gaurdian = 1;
+		background = 1;
+		character = 4;
 		
 		image = new Image();
 		xPos = 0;
@@ -69,6 +74,17 @@ function f()
 	
 	function update()
 	{
+			if(correctAnswers >= 4)
+			{
+				jump();
+				if(player.y < 0-player.height)
+				{
+					level++;
+					gaurdian++;
+					background++;
+					correctAnswers = 0;
+				}
+			}
 		if (keys[37])
 		{
 			if(player.velX > -player.speed)
@@ -80,11 +96,11 @@ function f()
 				player.velX++;
 			}
 		}
-		if (keys[38] || keys[32])
-		{
+		//if (keys[38] || keys[32])
+		//{
 		//u[p
-			jump();			
-		}
+		//	jump();			
+		//}
 		if (keys[39])
 		{
 			if(player.velX < player.speed)
@@ -162,6 +178,7 @@ function f()
 			{
 				alert("YOU ARE SUPER PLAYER");
 				correctAnswers++;
+				object.x = width+object.width;
 				generate();
 				answer = getAnsNum();
 			}
@@ -169,6 +186,7 @@ function f()
 			{
 				alert("YOU ARE SUPER PLAYER");
 				correctAnswers++;
+				object.x = width+object.width;
 				generate();
 				answer = getAnsNum();
 			}
@@ -176,13 +194,23 @@ function f()
 			{
 				alert("YOU ARE SUPER PLAYER");
 				correctAnswers++;
+				object.x = width+object.width;
 				generate();
 				answer = getAnsNum();
 			}
 			else
 			{
 				wrongAnswers++;
+				health--;
 				alert("ALRT: LOSER");
+			}
+			if(health <= 0)
+			{
+				alert("GAME OER");
+			}
+			if(correctAnswers >= 4)
+			{
+				alert("GAME UP");
 			}
 		}
 		if(y>=height-50 && x <= 100)
@@ -228,14 +256,14 @@ function f()
 				}
 			}
 		}
-		ctx.drawImage(imageArray["p2"], player.x+20+shake, player.y-30, player.width, player.height);
+		ctx.drawImage(imageArray["p"+character], player.x+20+shake, player.y-30, player.width, player.height);
 		if(player.dead)
 		{
-			ctx.drawImage(imageArray["g1"], object.x + shake, object.y -150 + yPos*80, object.width, object.height );
+			ctx.drawImage(imageArray["g"+gaurdian], object.x + shake, object.y -150 + yPos*80, object.width, object.height );
 		}
 		else
 		{	
-			ctx.drawImage(imageArray["g1"], object.x + shake, object.y -50 + yPos, object.width, object.height );
+			ctx.drawImage(imageArray["g"+gaurdian], object.x + shake, object.y -50 + yPos, object.width, object.height );
 		}
 	}
 	function processCollisions()
@@ -303,16 +331,7 @@ function f()
 	function loadImages(player, background, guardian)
 	{
 		imageArray = [];
-		
-		imageArray["b1a"] = new Image();
-		imageArray["b1a"].src = "images2/b1.PNG";
-		
-		imageArray["p2"] = new Image();
-		imageArray["p2"].src = "images2/p2.PNG";
-		
-		imageArray["g1"] = new Image();
-		imageArray["g1"].src = "images2/g1.PNG";
-		
+				
 		var counter = 1;
 		for(var i = 0; i < 7; i++)
 		{
@@ -324,26 +343,23 @@ function f()
 			}
 			if(i < 6)
 			{
-				animation = "images/Dead000";
-				imageArray["dead"+(counter)] = new Image();
-				imageArray["dead"+(counter)].src = animation+(counter)+".PNG";
+				animation = "images2/p";
+		
+				imageArray["p"+counter] = new Image();
+				imageArray["p"+(counter)].src = animation+(counter)+".PNG";
 			}
 			if(i < 5)
 			{
-				animation = "images/b1000";
-				imageArray["b1"+(counter)] = new Image();
-				imageArray["b1"+(counter)].src = animation+(counter)+".PNG";
-				
-				animation = "images/b2000";
-				imageArray["b2"+(counter)] = new Image();
-				imageArray["b2"+(counter)].src = animation+(counter)+".PNG";
+				animation = "images2/g";
+				imageArray["g"+counter] = new Image();
+				imageArray["g"+(counter)].src = animation+(counter)+".PNG";
 			
 			}
-			if (i < 6)
+			if (i < 4)
 			{
-				animation = "images/Jump000";
-				imageArray["jump"+(counter)] = new Image();
-				imageArray["jump"+(counter)].src = animation+(counter)+".PNG";
+				animation = "images2/b";
+				imageArray["b"+(counter)] = new Image();
+				imageArray["b"+(counter)].src = animation+(counter)+".PNG";
 			}
 			counter++;
 		}
@@ -351,7 +367,7 @@ function f()
 	function drawBackground()
 	{
 		animation = "b1";
-		ctx.drawImage(imageArray["b1a"],  0, 0+yPos);
+		ctx.drawImage(imageArray["b"+background],  0, 0+yPos);
 	//	animation = "b2";
 		//ctx.drawImage(imageArray[animation+(backgroundIndex)],  xPos, 0);
 		//ctx.drawImage(imageArray[animation+(backgroundIndex)],  xPos+1000, 0);
@@ -378,12 +394,9 @@ function f()
 	}
 	function jump()
 	{
-		if(!player.jumping)
-		{
 			player.jumping = false;
 			player.velY = -player.jump;
 			index = 1;
-		}
 	}
 	function fps()
 	{
