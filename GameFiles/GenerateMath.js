@@ -4,6 +4,7 @@ var sec;
 var type
 var ans;
 var ansNum;
+
 function generate()
 {
 
@@ -89,11 +90,16 @@ function getAnswer()
 	return(ans);
 }
 
+function getAnsNum()
+{
+	return ansNum;
+}
+
 function getAns1()
 {
 	if(ansNum == 1)
 	{
-		return(ansNum);
+		return(ans);
 	}
 	else
 	{
@@ -105,7 +111,7 @@ function getAns2()
 {
 	if(ansNum == 2)
 	{
-		return(ansNum);
+		return(ans);
 	}
 	else
 	{
@@ -117,7 +123,7 @@ function getAns3()
 {
 	if(ansNum == 3)
 	{
-		return(ansNum);
+		return(ans);
 	}
 	else
 	{
@@ -129,7 +135,7 @@ function getAns4()
 {
 	if(ansNum == 4)
 	{
-		return(ansNum);
+		return(ans);
 	}
 	else
 	{
