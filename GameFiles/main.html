@@ -2,9 +2,21 @@
 <head>
     <title>Something fancy</title>
 </head>
-<script src = "GenerateMath.js"></script>
-<script src = "GenerateScience.js"></script>
+<script type="text/javascript" src = "CharChooser.js"></script>
+<script type="text/javascript" src = "GenerateMath.js"></script>
+<script type="text/javascript" src = "GenerateScience.js"></script>
 <script  type="text/javascript" src = "javascript.js"></script>
+<script  type="text/javascript"> 
+	function setChar(x)
+	{ 
+		charNum = x;
+	}
+	function getChar()
+	{
+		return charNum;
+	}
+</script>
+
 <body onload = "f()">
 <style>	canvas{position: absolute; top: 0; left: 0;}
 		button{position: absolute;top: 0;left: 0;width: 1100px; height: 600px;}

@@ -1,6 +1,8 @@
 
 function f()
 {
+		character = 1;
+		character = 2;
 		var canvas = document.getElementById("canvas"),
 		ctx = canvas.getContext("2d"),
 
@@ -56,7 +58,6 @@ function f()
 		level = 1;
 		gaurdian = 1;
 		background = 1;
-		character = 4;
 		
 		image = new Image();
 		xPos = 0;
