@@ -1,8 +1,9 @@
 
 function f()
 {
-		character = 1;
-		character = 2;
+		var query = window.location.search.substring(1);
+		var vars = query.split('=');
+		character = decodeURIComponent(vars[1]);
 		var canvas = document.getElementById("canvas"),
 		ctx = canvas.getContext("2d"),
 
@@ -443,34 +444,59 @@ function f()
 		ctx.fillText(1000/deltaTime2, 100, 100);
 		if(showUI)
 		{
+			ctx.fillStyle = "white";
+			ctx.font="60px 'Curlz MT' ";
+			ctx.fillText(getQuestion(),object.x,height-60);
+			ctx.fillStyle = "black";
+			ctx.font="60px 'Curlz MT' ";
+			ctx.fillText(getQuestion(),object.x+2,height-60);
+		
 			ctx.fillStyle = "black 20px";
 			ctx.fillRect(0,height-50,100,50);
-			ctx.fillText(getQuestion(), width/2, height-100);
 			ctx.fillStyle = "red";
 			ctx.fillRect(0,0,width/4,100);
 			
 			ctx.fillStyle = "blue";
 			if(answer == 1)
 			{
-				ctx.fillText(getAnswer(),25, 25);
+			ctx.fillStyle = "white";
+			ctx.font="60px 'Curlz MT' ";
+			ctx.fillText(getAnswer(),25, 25);
+			ctx.fillStyle = "black";
+			ctx.font="60px 'Curlz MT' ";
+			ctx.fillText(getAnswer(),25, 25);
 			}
 			ctx.fillRect(0+width/4,0,width/4,100);
 			ctx.fillStyle = "green";
 			if(answer == 2)
 			{
+				ctx.fillStyle = "white";
+				ctx.font="60px 'Curlz MT' ";
 				ctx.fillText(getAnswer(),25+width/4, 25);
+				ctx.fillStyle = "black";
+				ctx.font="60px 'Curlz MT' ";
+				ctx.fillText(getAnswer(),27+width/4, 25);
 			}
 			ctx.fillRect(0+width/2,0,width/4,100);
 			ctx.fillStyle = "pink";
 			if(answer == 3)
 			{
+				ctx.fillStyle = "white";
+				ctx.font="60px 'Curlz MT' ";
 				ctx.fillText(getAnswer(),25+width/2, 25);
+				ctx.fillStyle = "black";
+				ctx.font="60px 'Curlz MT' ";
+				ctx.fillText(getAnswer(),27+width/2, 25);
 			}
 			ctx.fillRect(3*width/4,0,width/4,100);
 			if(answer == 4)
 			{
-				ctx.fillStyle = "black";
+				ctx.fillStyle = "white";
+				ctx.font="60px 'Curlz MT' ";
 				ctx.fillText(getAnswer(),25+3*width/4, 25);
+				ctx.fillStyle = "black";
+				ctx.font="60px 'Curlz MT' ";
+				ctx.fillText(getAnswer(),27+3*width/4, 25);
 			}
 		}
 	}
