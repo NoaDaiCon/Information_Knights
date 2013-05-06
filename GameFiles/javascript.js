@@ -6,10 +6,6 @@ function f()
 		character = decodeURIComponent(vars[1]);
 		var canvas = document.getElementById("canvas"),
 		ctx = canvas.getContext("2d"),
-		if(character < 1 || character > 6)
-		{
-			character = 1;
-		}
 		width = 1000,
 		height = 600,
 		
@@ -25,6 +21,10 @@ function f()
 		dead : false,
 		jumping: false
 		};
+		if(character < 1 || character > 6)
+		{
+			character = 1;
+		}
 		
 		object = {
 		x : width,
