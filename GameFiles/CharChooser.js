@@ -1,4 +1,4 @@
-player = 0;
+player;
 
 function init()
 {
