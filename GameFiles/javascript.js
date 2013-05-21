@@ -4,10 +4,12 @@ function f()
 		var query = window.location.search.substring(1);
 		var vars = query.split('=');
 		character = decodeURIComponent(vars[1]);
+		character = 1;
 		var canvas = document.getElementById("canvas"),
 		ctx = canvas.getContext("2d"),
 		width = 1000,
 		height = 600,
+		
 		
 		player = {
 		x : 100,
@@ -21,10 +23,6 @@ function f()
 		dead : false,
 		jumping: false
 		};
-		if(character < 1 || character > 6)
-		{
-			character = 1;
-		}
 		
 		object = {
 		x : width,
@@ -74,6 +72,7 @@ function f()
 	document.body.appendChild(canvas);
 	loadImages();
 	generate();
+	generateScience();
 	answer = getAnsNum();
 	update();	
 	
@@ -173,35 +172,19 @@ function f()
 		{
 			if(x <= width/4 && answer == 1)
 			{
-				alert("YOU ARE SUPER PLAYER");
-				correctAnswers++;
-				object.x = width+object.width;
-				generate();
-				answer = getAnsNum();
+				correctAnswer();
 			}
 			else if(x > width/4 && x < width/2 && answer == 2)
 			{
-				alert("YOU ARE SUPER PLAYER");
-				correctAnswers++;
-				object.x = width+object.width;
-				generate();
-				answer = getAnsNum();
+				correctAnswer();
 			}
 			else if(x > width/2 && x <= 3*width/4 && answer == 3)
 			{
-				alert("YOU ARE SUPER PLAYER");
-				correctAnswers++;
-				object.x = width+object.width;
-				generate();
-				answer = getAnsNum();
+				correctAnswer();
 			}
 			else if(x > 3*width/4 && x <= width && answer == 4)
 			{
-				alert("YOU ARE SUPER PLAYER");
-				correctAnswers++;
-				object.x = width+object.width;
-				generate();
-				answer = getAnsNum();
+				correctAnswer();
 			}
 			else
 			{
@@ -340,11 +323,11 @@ function f()
 		var counter = 1;
 		for(var i = 0; i < 7; i++)
 		{
-			if(i < 7)
+			if(i < 1)
 			{
-				animation = "images/main walk cycle000";
-				imageArray["walk"+(counter)] = new Image();
-				imageArray["walk"+(counter)].src = animation+(counter)+".PNG";
+				animation = "images2/ansButton";
+				imageArray["button"] = new Image();
+				imageArray["button"].src = animation+".PNG";
 			}
 			if(i < 6)
 			{
@@ -447,60 +430,133 @@ function f()
 		ctx.fillText(1000/deltaTime2, 100, 100);
 		if(showUI)
 		{
-			ctx.fillStyle = "white";
-			ctx.font="60px 'Curlz MT' ";
-			ctx.fillText(getQuestion(),object.x,height-60);
-			ctx.fillStyle = "black";
-			ctx.font="60px 'Curlz MT' ";
-			ctx.fillText(getQuestion(),object.x+2,height-60);
-		
+			if(level == 1)
+			{
+				ctx.fillStyle = "black";
+				ctx.font="60px 'Bernard MT Condensed' ";
+				ctx.fillText(getQuestion(),400,height-350);
+				ctx.fillStyle = "white";
+				ctx.font="60px 'Bernard MT Condensed' ";
+				ctx.fillText(getQuestion(),402,height-350);
+			}
+			if(level == 2)
+			{
+				ctx.fillStyle = "black";
+				ctx.font="30px 'Bernard MT Condensed' ";
+				ctx.fillText(getScienceQues(),100,height-350);
+				ctx.fillStyle = "white";
+				ctx.font="30px 'Bernard MT Condensed' ";
+				ctx.fillText(getScienceQues(),102,height-350);
+			}
+			
 			ctx.fillStyle = "black 20px";
-			ctx.fillRect(0,height-50,100,50);
+			
+			ctx.drawImage(imageArray["button"], 0,height-50,100,50);
 			ctx.fillStyle = "red";
-			ctx.fillRect(0,0,width/4,100);
+			ctx.drawImage(imageArray["button"],0,0,width/4,100);
 			
 			ctx.fillStyle = "blue";
-			if(answer == 1)
-			{
-			ctx.fillStyle = "white";
-			ctx.font="60px 'Curlz MT' ";
-			ctx.fillText(getAnswer(),25, 25);
+			
 			ctx.fillStyle = "black";
-			ctx.font="60px 'Curlz MT' ";
-			ctx.fillText(getAnswer(),25, 25);
+			ctx.font="60px 'Bernard MT Condensed' ";
+			if(level == 1)
+			{
+				ctx.fillText(getAns1(),95, 70);
 			}
-			ctx.fillRect(0+width/4,0,width/4,100);
+			else if(level == 2)
+			{
+				ctx.fillText(getSciAns1(),95, 70);
+			}
+			
+			ctx.fillStyle = "white";
+			ctx.font="60px 'Bernard MT Condensed' ";
+			if(level == 1)
+			{
+			ctx.fillText(getAns1(),97, 70);
+			}
+			else if(level == 2)
+			{
+				ctx.fillText(getSciAns1(),95, 70);
+			}
+			
+			ctx.drawImage(imageArray["button"],0+width/4,0,width/4,100);
 			ctx.fillStyle = "green";
-			if(answer == 2)
-			{
-				ctx.fillStyle = "white";
-				ctx.font="60px 'Curlz MT' ";
-				ctx.fillText(getAnswer(),25+width/4, 25);
+			
 				ctx.fillStyle = "black";
-				ctx.font="60px 'Curlz MT' ";
-				ctx.fillText(getAnswer(),27+width/4, 25);
+				ctx.font="60px 'Bernard MT Condensed' ";
+			if(level == 1)
+			{
+				ctx.fillText(getAns2(),95+width/4, 70);
 			}
-			ctx.fillRect(0+width/2,0,width/4,100);
+			else if(level == 2)
+			{
+				ctx.fillText(getSciAns2(),95, 70);
+			}
+				
+				ctx.fillStyle = "white";
+				ctx.font="60px 'Bernard MT Condensed' ";
+			if(level == 1)
+			{
+				ctx.fillText(getAns2(),97+width/4, 70);
+			}
+			else if(level == 2)
+			{
+				ctx.fillText(getSciAns2(),95, 70);
+			}
+			ctx.drawImage(imageArray["button"],0+width/2,0,width/4,100);
 			ctx.fillStyle = "pink";
-			if(answer == 3)
-			{
-				ctx.fillStyle = "white";
-				ctx.font="60px 'Curlz MT' ";
-				ctx.fillText(getAnswer(),25+width/2, 25);
+			
 				ctx.fillStyle = "black";
-				ctx.font="60px 'Curlz MT' ";
-				ctx.fillText(getAnswer(),27+width/2, 25);
-			}
-			ctx.fillRect(3*width/4,0,width/4,100);
-			if(answer == 4)
-			{
+				ctx.font="60px 'Bernard MT Condensed' ";
+				ctx.fillText(getAns3(),95+width/2, 70);
+				
 				ctx.fillStyle = "white";
-				ctx.font="60px 'Curlz MT' ";
-				ctx.fillText(getAnswer(),25+3*width/4, 25);
-				ctx.fillStyle = "black";
-				ctx.font="60px 'Curlz MT' ";
-				ctx.fillText(getAnswer(),27+3*width/4, 25);
+				ctx.font="60px 'Bernard MT Condensed' ";
+			if(level == 1)
+			{
+				ctx.fillText(getAns3(),97+width/2, 70);
 			}
+			else if(level == 2)
+			{
+				ctx.fillText(getSciAns3(),95, 70);
+			}
+			ctx.drawImage(imageArray["button"],3*width/4,0,width/4,100);
+			
+				ctx.fillStyle = "black";
+				ctx.font="60px 'Bernard MT Condensed' ";
+			if(level == 1)
+			{
+				ctx.fillText(getAns4(),95+3*width/4, 70);
+			}
+			else if(level == 2)
+			{
+				ctx.fillText(getSciAns4(),95, 70);
+			}
+				ctx.fillStyle = "white";
+				ctx.font="60px 'Bernard MT Condensed' ";
+			if(level == 1)
+			{
+				ctx.fillText(getAns4(),97+3*width/4, 70);
+			}
+			else if(level == 2)
+			{
+				ctx.fillText(getSciAns4(),95, 70);
+			}
+		}
+	}
+	function correctAnswer()
+	{
+		alert("YOU ARE SUPER PLAYER");
+		correctAnswers++;
+		object.x = width+object.width;
+		if(level == 1)
+		{
+			generate();
+			answer = getAnsNum();
+		}
+		else if(level == 2)
+		{
+			answer = getScienceAns();
 		}
 	}
 }

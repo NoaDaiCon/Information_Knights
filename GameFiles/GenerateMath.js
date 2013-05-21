@@ -4,12 +4,18 @@ var sec;
 var type
 var ans;
 var ansNum;
-
+var ans1;
+var ans2;
+var ans3;
+var ans4;
 function generate()
 {
-
 	type=Math.floor(Math.random()*4);	
 	ansNum=Math.floor((Math.random()*4)+1);
+	ans1 = Math.floor(Math.random()*101);
+	ans2 = Math.floor(Math.random()*101);
+	ans3 = Math.floor(Math.random()*101);
+	ans4 = Math.floor(Math.random()*101);
 	
 	if(type==0)
 	{
@@ -50,6 +56,23 @@ function generate()
 	
 	else
 	{
+	}
+	ans1 = ans;
+	while(ans1 == ans)
+	{
+		ans1 = Math.floor(Math.random()*101);
+	}
+	while(ans2 == ans)
+	{
+		ans2 = Math.floor(Math.random()*101);
+	}
+	while(ans3 == ans)
+	{
+		ans3 = Math.floor(Math.random()*101);
+	}
+	while(ans4 == ans)
+	{
+		ans4 = Math.floor(Math.random()*101);
 	}
 }
 
@@ -103,7 +126,7 @@ function getAns1()
 	}
 	else
 	{
-		return Math.floor(Math.random()*101);
+		return ans1;
 	}
 }
 
@@ -115,7 +138,7 @@ function getAns2()
 	}
 	else
 	{
-		return Math.floor(Math.random()*101);
+		return ans2;
 	}
 }
 
@@ -127,7 +150,7 @@ function getAns3()
 	}
 	else
 	{
-		return Math.floor(Math.random()*101);
+		return ans3;
 	}
 }
 
@@ -139,7 +162,7 @@ function getAns4()
 	}
 	else
 	{
-		return Math.floor(Math.random()*101);
+		return ans4;
 	}
 }
 

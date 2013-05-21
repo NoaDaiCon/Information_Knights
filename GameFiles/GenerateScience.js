@@ -1,9 +1,9 @@
 var ques = new Array();
-var ans = new Array();
+var sciAns = new Array();
 var random;
-
 function generateScience()
 {
+	ansButton = Math.floor(Math.random()*4)+1;
 	generateQuestions();
 	generateAnswers();
 }
@@ -17,7 +17,7 @@ function getScienceQues()
 
 function getScienceAns()
 {
-	return ans[random];
+	return sciAns[random];
 }
 
 function generateQuestions()
@@ -34,12 +34,79 @@ function generateQuestions()
 
 function generateAnswers()
 {
-	ans[0] = "C'est plus facile";
-	ans[1] = "Cire";
-	ans[2] = "Tu peut utiliser ton crops";
-	ans[3] = "100";
-	ans[4] = "Son";
-	ans[5] = "Conique, dent droit, vis son fin, et cremaillere";
-	ans[6] = "Poulie, Rone et l'axe, lever, vis , et plan incline";
-	ans[7] = "Parce que il n'y a paas de gas";
+	sciAns[0] = "C'est plus facile";
+	sciAns[1] = "Cire";
+	sciAns[2] = "Tu peut utiliser ton crops";
+	sciAns[3] = "100";
+	sciAns[4] = "Son";
+	sciAns[5] = "Conique, dent droit, vis son fin, et cremaillere";
+	sciAns[6] = "Poulie, Rone et l'axe, lever, vis , et plan incline";
+	sciAns[7] = "Parce que il n'y a paas de gas";
+	sciAns1 = Math.floor(Math.random()*8);
+	sciAns2 = Math.floor(Math.random()*8);
+	sciAns3 = Math.floor(Math.random()*8);
+	sciAns4 = Math.floor(Math.random()*8);
+	while(sciAns1 == sciAns2 || sciAns1 == sciAns3 || sciAns1 == random || sciAns1 == sciAns4)
+	{
+		sciAns1 = Math.floor(Math.random()*8);
+	}
+	while(sciAns2 == sciAns1 || sciAns2 == sciAns3 || sciAns2 == random || sciAns2 == sciAns4)
+	{
+		sciAns2 = Math.floor(Math.random()*8);
+	}
+	while(sciAns3 == sciAns2 || sciAns3 == sciAns1 || sciAns3 == random || sciAns3 == sciAns4)
+	{
+		sciAns3 = Math.floor(Math.random()*8);
+	}
+	while(sciAns4 == sciAns2 || sciAns4 == sciAns3 || sciAns4 == random || sciAns4 == sciAns1)
+	{
+		sciAns4 = Math.floor(Math.random()*8);
+	}
+}
+	function getSciAns1()
+{
+	if(ansButton == 1)
+	{
+		return(sciAns[random]);
+	}
+	else
+	{
+		return (sciAns[sciAns1]);
+	}
+}
+
+function getSciAns2()
+{
+	if(ansButton == 2)
+	{
+		return(sciAns[random]);
+	}
+	else
+	{
+		return sciAns[sciAns1];
+	}
+}
+
+function getSciAns3()
+{
+	if(ansButton == 3)
+	{
+		return(sciAns[random]);
+	}
+	else
+	{
+		return sciAns[sciAns1];
+	}
+}
+
+function getSciAns4()
+{
+	if(ansButton == 4)
+	{
+		return(sciAns[random]);
+	}
+	else
+	{
+		return sciAns[sciAns1];
+	}
 }
