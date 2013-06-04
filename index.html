@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="Scripts/style.css"/>
 	<script src="Scripts/jquery-1.9.1.js"></script>
 	<script src="Scripts/jquery.mobile-1.3.0.js"></script>
+	<script type="text/javascript" src="Scripts/storeScripts.js"></script>
 	
 </head> 
 
@@ -43,7 +44,7 @@
 			<ul>
 				<li><a href=""><img src="images/jouer.png" height="100" width="100"></a></li>
 				<li><a href="#instruction" data-transition = "flow"><img src="images/instructions.png" height="100" width="200"></a></li>
-				<li><a href="#store" data-transition = "flow"><img src="images/magasine.png" height="100" width="100"></a></li>
+				<li><a href="#store" data-transition = "flow"><img src="images/magasine.png" height="100" width="100" onClick="storeInit()"></a></li>
 				<li><a href="#about" data-transition="flip"><img src="images/creature.png" height="100" width="200"></a></li>
 			</ul>
 		</div>
@@ -60,29 +61,25 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-		<table align = "center">
+	
+		<table align = "center" cellpadding="0" border="0">
 			<tr>
-				<td align = "center">
-				upgrade1
-				</td align = "center">
-				<td align = "center">
-				upgrade2
+				<td align = "center" colspan="4">
+				<img src="images/store_header.png">
 				</td>
 			</tr>
 			<tr>
 				<td align = "center">
-				upgrade3
+				<img src="images/store_up1.png" onClick="addHeart()">
 				</td>
 				<td align = "center">
-				upgrade4
+				<img src="images/store_up2.png" onClick="addSword()">
 				</td>
-			</tr>
-			<tr>
-				<td align = "center">
-				upgrade5
+				<td>
+				<img src="images/store_up3.png"onClick="addShield()">
 				</td>
-				<td align = "center">
-				upgrade6
+				<td>
+				<img src="images/store_up4.png"onClick="addDrink()">
 				</td>
 			</tr>
 		
