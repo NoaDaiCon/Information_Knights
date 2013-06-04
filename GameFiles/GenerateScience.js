@@ -4,17 +4,20 @@ var random;
 function generateScience()
 {
 	ansButton = Math.floor(Math.random()*4)+1;
+	random=Math.floor(Math.random()*8);
 	generateQuestions();
 	generateAnswers();
 }
 
 function getScienceQues()
 {
-	random=Math.floor(Math.random()*8);
 	
 	return ques[random];
 }
-
+function getSciAnsNum()
+{
+	return ansButton;
+}
 function getScienceAns()
 {
 	return sciAns[random];
@@ -46,19 +49,19 @@ function generateAnswers()
 	sciAns2 = Math.floor(Math.random()*8);
 	sciAns3 = Math.floor(Math.random()*8);
 	sciAns4 = Math.floor(Math.random()*8);
-	while(sciAns1 == sciAns2 || sciAns1 == sciAns3 || sciAns1 == random || sciAns1 == sciAns4)
+	while(sciAns1 == sciAns2 || sciAns1 == sciAns3 || sciAns1 == random || sciAns1 == sciAns4 || sciAns1 == random)
 	{
 		sciAns1 = Math.floor(Math.random()*8);
 	}
-	while(sciAns2 == sciAns1 || sciAns2 == sciAns3 || sciAns2 == random || sciAns2 == sciAns4)
+	while(sciAns2 == sciAns1 || sciAns2 == sciAns3 || sciAns2 == random || sciAns2 == sciAns4 || sciAns2 == random)
 	{
 		sciAns2 = Math.floor(Math.random()*8);
 	}
-	while(sciAns3 == sciAns2 || sciAns3 == sciAns1 || sciAns3 == random || sciAns3 == sciAns4)
+	while(sciAns3 == sciAns2 || sciAns3 == sciAns1 || sciAns3 == random || sciAns3 == sciAns4 || sciAns3 == random)
 	{
 		sciAns3 = Math.floor(Math.random()*8);
 	}
-	while(sciAns4 == sciAns2 || sciAns4 == sciAns3 || sciAns4 == random || sciAns4 == sciAns1)
+	while(sciAns4 == sciAns2 || sciAns4 == sciAns3 || sciAns4 == random || sciAns4 == sciAns1 || sciAns4 == random)
 	{
 		sciAns4 = Math.floor(Math.random()*8);
 	}
@@ -83,7 +86,7 @@ function getSciAns2()
 	}
 	else
 	{
-		return sciAns[sciAns1];
+		return sciAns[sciAns2];
 	}
 }
 
@@ -95,7 +98,7 @@ function getSciAns3()
 	}
 	else
 	{
-		return sciAns[sciAns1];
+		return sciAns[sciAns3];
 	}
 }
 
@@ -107,6 +110,6 @@ function getSciAns4()
 	}
 	else
 	{
-		return sciAns[sciAns1];
+		return sciAns[sciAns4];
 	}
 }

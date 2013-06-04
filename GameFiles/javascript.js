@@ -78,7 +78,7 @@ function f()
 	
 	function update()
 	{
-			if(correctAnswers >= 4)
+			if(correctAnswers >= 1)
 			{
 				jump();
 				if(player.y < 0-player.height)
@@ -86,6 +86,8 @@ function f()
 					level++;
 					gaurdian++;
 					background++;
+					generateScience();
+					answer = getSciAnsNum();
 					correctAnswers = 0;
 				}
 			}
@@ -167,7 +169,6 @@ function f()
 	{
 		var x = e.clientX;
 		var y = e.clientY;
-		answer = getAnsNum();
 		if(y <= 100)
 		{
 			if(x <= width/4 && answer == 1)
@@ -449,6 +450,7 @@ function f()
 				ctx.fillText(getScienceQues(),102,height-350);
 			}
 			
+				ctx.fillText(answer,97+3*width/4, 370);
 			ctx.fillStyle = "black 20px";
 			
 			ctx.drawImage(imageArray["button"], 0,height-50,100,50);
@@ -465,6 +467,7 @@ function f()
 			}
 			else if(level == 2)
 			{
+				ctx.font="12px 'Bernard MT Condensed' ";
 				ctx.fillText(getSciAns1(),95, 70);
 			}
 			
@@ -476,7 +479,8 @@ function f()
 			}
 			else if(level == 2)
 			{
-				ctx.fillText(getSciAns1(),95, 70);
+				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.fillText(getSciAns1(),97, 70);
 			}
 			
 			ctx.drawImage(imageArray["button"],0+width/4,0,width/4,100);
@@ -490,7 +494,8 @@ function f()
 			}
 			else if(level == 2)
 			{
-				ctx.fillText(getSciAns2(),95, 70);
+				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.fillText(getSciAns2(),95+width/4, 70);
 			}
 				
 				ctx.fillStyle = "white";
@@ -501,15 +506,23 @@ function f()
 			}
 			else if(level == 2)
 			{
-				ctx.fillText(getSciAns2(),95, 70);
+				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.fillText(getSciAns2(),97+width/4, 70);
 			}
 			ctx.drawImage(imageArray["button"],0+width/2,0,width/4,100);
 			ctx.fillStyle = "pink";
 			
 				ctx.fillStyle = "black";
 				ctx.font="60px 'Bernard MT Condensed' ";
+			if(level == 1)
+			{
 				ctx.fillText(getAns3(),95+width/2, 70);
-				
+			}
+			else if(level == 2)
+			{
+				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.fillText(getSciAns3(),95+width/2, 70);
+			}
 				ctx.fillStyle = "white";
 				ctx.font="60px 'Bernard MT Condensed' ";
 			if(level == 1)
@@ -518,7 +531,8 @@ function f()
 			}
 			else if(level == 2)
 			{
-				ctx.fillText(getSciAns3(),95, 70);
+				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.fillText(getSciAns3(),97+width/2, 70);
 			}
 			ctx.drawImage(imageArray["button"],3*width/4,0,width/4,100);
 			
@@ -530,7 +544,8 @@ function f()
 			}
 			else if(level == 2)
 			{
-				ctx.fillText(getSciAns4(),95, 70);
+				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.fillText(getSciAns4(),95+3*width/4, 70);
 			}
 				ctx.fillStyle = "white";
 				ctx.font="60px 'Bernard MT Condensed' ";
@@ -540,7 +555,8 @@ function f()
 			}
 			else if(level == 2)
 			{
-				ctx.fillText(getSciAns4(),95, 70);
+				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.fillText(getSciAns4(),97+3*width/4, 70);
 			}
 		}
 	}
@@ -556,7 +572,13 @@ function f()
 		}
 		else if(level == 2)
 		{
-			answer = getScienceAns();
+			generateScience();
+			answer = getSciAnsNum();
+			ctx.fillText(answer,97+3*width/4, 370);
 		}
+	}
+	function stringManipulation()
+	{
+		
 	}
 }
