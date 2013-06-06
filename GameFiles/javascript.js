@@ -440,7 +440,7 @@ function f()
 				ctx.font="60px 'Bernard MT Condensed' ";
 				ctx.fillText(getQuestion(),402,height-350);
 			}
-			if(level == 2)
+			if(level >= 2)
 			{
 				ctx.fillStyle = "black";
 				ctx.font="30px 'Bernard MT Condensed' ";
@@ -465,9 +465,9 @@ function f()
 			{
 				ctx.fillText(getAns1(),95, 70);
 			}
-			else if(level == 2)
+			else if(level >= 2)
 			{
-				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.font="25px 'Bernard MT Condensed' ";
 				ctx.fillText(getSciAns1(),95, 70);
 			}
 			
@@ -477,9 +477,9 @@ function f()
 			{
 			ctx.fillText(getAns1(),97, 70);
 			}
-			else if(level == 2)
+			else if(level >= 2)
 			{
-				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.font="25px 'Bernard MT Condensed' ";
 				ctx.fillText(getSciAns1(),97, 70);
 			}
 			
@@ -492,9 +492,9 @@ function f()
 			{
 				ctx.fillText(getAns2(),95+width/4, 70);
 			}
-			else if(level == 2)
+			else if(level >= 2)
 			{
-				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.font="25px 'Bernard MT Condensed' ";
 				ctx.fillText(getSciAns2(),95+width/4, 70);
 			}
 				
@@ -504,9 +504,9 @@ function f()
 			{
 				ctx.fillText(getAns2(),97+width/4, 70);
 			}
-			else if(level == 2)
+			else if(level >= 2)
 			{
-				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.font="25px 'Bernard MT Condensed' ";
 				ctx.fillText(getSciAns2(),97+width/4, 70);
 			}
 			ctx.drawImage(imageArray["button"],0+width/2,0,width/4,100);
@@ -518,9 +518,9 @@ function f()
 			{
 				ctx.fillText(getAns3(),95+width/2, 70);
 			}
-			else if(level == 2)
+			else if(level >= 2)
 			{
-				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.font="25px 'Bernard MT Condensed' ";
 				ctx.fillText(getSciAns3(),95+width/2, 70);
 			}
 				ctx.fillStyle = "white";
@@ -529,9 +529,9 @@ function f()
 			{
 				ctx.fillText(getAns3(),97+width/2, 70);
 			}
-			else if(level == 2)
+			else if(level >= 2)
 			{
-				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.font="25px 'Bernard MT Condensed' ";
 				ctx.fillText(getSciAns3(),97+width/2, 70);
 			}
 			ctx.drawImage(imageArray["button"],3*width/4,0,width/4,100);
@@ -542,9 +542,9 @@ function f()
 			{
 				ctx.fillText(getAns4(),95+3*width/4, 70);
 			}
-			else if(level == 2)
+			else if(level >= 2)
 			{
-				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.font="25px 'Bernard MT Condensed' ";
 				ctx.fillText(getSciAns4(),95+3*width/4, 70);
 			}
 				ctx.fillStyle = "white";
@@ -553,9 +553,9 @@ function f()
 			{
 				ctx.fillText(getAns4(),97+3*width/4, 70);
 			}
-			else if(level == 2)
+			else if(level >= 2)
 			{
-				ctx.font="12px 'Bernard MT Condensed' ";
+				ctx.font="25px 'Bernard MT Condensed' ";
 				ctx.fillText(getSciAns4(),97+3*width/4, 70);
 			}
 		}
@@ -570,7 +570,7 @@ function f()
 			generate();
 			answer = getAnsNum();
 		}
-		else if(level == 2)
+		else if(level >= 2)
 		{
 			generateScience();
 			answer = getSciAnsNum();

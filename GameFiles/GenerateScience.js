@@ -25,26 +25,76 @@ function getScienceAns()
 
 function generateQuestions()
 {
-	ques[0] = "C'est quoi l'advantage d'un poulie mouble?";
-	ques[1] = "Q'est que notre orelle peut produce?";
-	ques[2] = "C'est quoi l'advantage d'un poulie fixe?";
-	ques[3] = "Combien de gram est un nuton?";
-	ques[4] = "Quel pressus est que les chauve souris utiliser pour le navigation?";
-	ques[5] = "C'est quoi les quatre type d'engrenages?";
-	ques[6] = "C'est quoi les 5 different machine simple?";
-	ques[7] = "Pour quoi est que il n'y a pas de son dans l'espace?";
+	if(level == 2)
+	{
+		ques[0] = "C'est quoi l'advantage d'un poulie mouble?";
+		ques[1] = "Q'est que notre orelle peut produce?";
+		ques[2] = "quelle planète vivons-nous en?";
+		ques[3] = "Combien de gram est un nuton?";
+		ques[4] = "Quel pressus est que les chauve souris utiliser pour le navigation?";
+		ques[5] = "Est la lumière invisible quand il se déplace?";
+		ques[6] = "qui est une machine simple?";
+		ques[7] = "Pour quoi est que il n'y a pas de son dans l'espace?";
+	}
+	else if(level == 3)
+	{
+		ques[0] = "où sont les baguettes de?";
+		ques[1] = "ILS de Sont masculin, et Elles de Sont?";
+		ques[2] = "où est la Tour Eiffel?";
+		ques[3] = "Quelle est la capitale du Québec?";
+		ques[4] = "Qu'est-ce 'roi' signifie en anglais?";
+		ques[5] = "Qu'est-ce 'chapeau' signifie en anglais?";
+		ques[6] = "Qu'est-ce 'cheval' signifie en anglais?";
+		ques[7] = "Qu'est-ce 'souris' signifie en anglais?";
+	}
+	else if(level == 4)
+	{
+		ques[0] = "Lequel des énoncés suivants est un groupe alimentaire?";
+		ques[1] = "de quelle couleur est une orange?";
+		ques[2] = "l'exercice est bon pour vous?";
+		ques[3] = "quand faut-il se laver les mains?";
+		ques[4] = "combien de portions de viande devriez-vous avoir?";
+		ques[5] = "Combien de repas faut-il manger par jour?";
+		ques[6] = "Qui voyez-vous quand vous êtes malade?";
+		ques[7] = "si vous êtes malade:";
+	}
 }
 
 function generateAnswers()
 {
-	sciAns[0] = "C'est plus facile";
-	sciAns[1] = "Cire";
-	sciAns[2] = "Tu peut utiliser ton crops";
-	sciAns[3] = "100";
-	sciAns[4] = "Son";
-	sciAns[5] = "Conique, dent droit, vis son fin, et cremaillere";
-	sciAns[6] = "Poulie, Rone et l'axe, lever, vis , et plan incline";
-	sciAns[7] = "Parce que il n'y a paas de gas";
+	if(level == 2)
+	{
+		sciAns[0] = "C'est plus facile";
+		sciAns[1] = "Cire";
+		sciAns[2] = "Terre";
+		sciAns[3] = "100";
+		sciAns[4] = "Son";
+		sciAns[5] = "faux";
+		sciAns[6] = "Poulie";
+		sciAns[7] = "pas de gaz";
+	}
+	else if(level == 3)
+	{
+		sciAns[0] = "France.";
+		sciAns[1] = "Féminin";
+		sciAns[2] = "Paris";
+		sciAns[3] = "Ville de Québec";
+		sciAns[4] = "king";
+		sciAns[5] = "hat";
+		sciAns[6] = "horse";
+		sciAns[7] = "mouse";
+	}
+	else if(level == 4)
+	{
+		sciAns[0] = "Fruits/Légumes";
+		sciAns[1] = "d'orange";
+		sciAns[2] = "oui";
+		sciAns[3] = "souvent";
+		sciAns[4] = "1-2";
+		sciAns[5] = "3";
+		sciAns[6] = "le médecin";
+		sciAns[7] = "rester à la maison";
+	}
 	sciAns1 = Math.floor(Math.random()*8);
 	sciAns2 = Math.floor(Math.random()*8);
 	sciAns3 = Math.floor(Math.random()*8);
