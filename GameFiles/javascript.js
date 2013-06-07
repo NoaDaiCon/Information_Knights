@@ -1,10 +1,12 @@
-
 function f()
 {
 		var query = window.location.search.substring(1);
 		var vars = query.split('=');
 		character = decodeURIComponent(vars[1]);
-		character = 1;
+		if(!(character > 1) || !(character < 6))
+		{
+			character = 1;
+		}
 		var canvas = document.getElementById("canvas"),
 		ctx = canvas.getContext("2d"),
 		width = 1000,
@@ -322,8 +324,39 @@ function f()
 		imageArray = [];
 				
 		var counter = 1;
+		var letter = "a";
 		for(var i = 0; i < 7; i++)
 		{
+			switch (i)
+			{
+				case 0:
+					letter = "a";
+					break;
+			
+				case 1:
+					letter = "b";
+					break;		
+			
+				case 2:
+					letter = "c";
+					break;		
+			
+				case 3:
+					letter = "d";
+					break;
+				
+				case 4:
+					letter = "e";
+					break;
+					
+				case 5:
+					letter = "f";
+					break;
+					
+				case 6:
+					letter = "g";
+					break;
+			}
 			if(i < 1)
 			{
 				animation = "images2/ansButton";
@@ -335,20 +368,20 @@ function f()
 				animation = "images2/p";
 		
 				imageArray["p"+counter] = new Image();
-				imageArray["p"+(counter)].src = animation+(counter)+".PNG";
+				imageArray["p"+(counter)].src = animation+(letter)+".PNG";
 			}
 			if(i < 5)
 			{
 				animation = "images2/g";
 				imageArray["g"+counter] = new Image();
-				imageArray["g"+(counter)].src = animation+(counter)+".PNG";
+				imageArray["g"+(counter)].src = animation+(letter)+".PNG";
 			
 			}
 			if (i < 4)
 			{
 				animation = "images2/b";
 				imageArray["b"+(counter)] = new Image();
-				imageArray["b"+(counter)].src = animation+(counter)+".PNG";
+				imageArray["b"+(counter)].src = animation+(letter)+".PNG";
 			}
 			counter++;
 		}

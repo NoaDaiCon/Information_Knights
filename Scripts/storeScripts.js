@@ -3,7 +3,7 @@ function storeInit()
 {
 	if(!localStorage.coins)
 	{
-		localStorage.coins="0";
+		localStorage.coins="10000";
 	}
 	if(!localStorage.hearts)
 	{
@@ -40,10 +40,6 @@ function addHeart()
 		localStorage.hearts++;
 		alert("You have bought a life!");
 	}
-	else
-	{
-		alert("You don't have enough coins for a life!");
-	{
 }
 
 function addSword()
@@ -53,10 +49,6 @@ function addSword()
 		localStorage.swords++;
 		alert("You have bought a sword!");
 	}
-	else
-	{
-		alert("You don't have enough coins for a sword!");
-	{
 }
 
 function addShield()
@@ -66,10 +58,6 @@ function addShield()
 		localStorage.shields++;
 		alert("You have bought a sword!");
 	}
-	else
-	{
-		alert("You don't have enough coins for a shield!");
-	{
 }
 
 function addDrink()
@@ -79,8 +67,4 @@ function addDrink()
 		localStorage.drinks++;
 		alert("You have bought a drink!");
 	}
-	else
-	{
-		alert("You don't have enough coins for a drink!");
-	{
 }
