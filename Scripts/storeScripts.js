@@ -1,5 +1,11 @@
 function storeInit() 
 {
+	displayCoins = document.getElementById("coinDisplay");
+	displayHearts = document.getElementById("heartDisplay");
+	displaySwords = document.getElementById("swordDisplay");
+	displayShields = document.getElementById("shieldDisplay");
+	displayDrinks = document.getElementById("drinkDisplay");
+	
 	if(localStorage.getItem("coins") === null)
 	{
 		localStorage.coins=0;
@@ -20,6 +26,8 @@ function storeInit()
 	{
 		localStorage.drinks=0;
 	}
+	
+	document.getElementById("coinDisplay").innerHTML = "" + localStorage.coins;
 }
 
 function addHeart()
@@ -28,7 +36,8 @@ function addHeart()
 	{
 		localStorage.hearts++;
 		localStorage.coins -=60;
-		alert("You bought a Heart! Hearts: " + localStorage.hearts + "Coins: " + localStorage.coins);
+		alert("You bought a Heart! Coins: " + localStorage.coins + " Hearts: " + localStorage.hearts );
+		displayCoins.innerHTML = localStorage.coins;
 	}
 	else
 	{
@@ -42,7 +51,7 @@ function addSword()
 	{
 		localStorage.swords++;
 		localStorage.coins -=100;
-		alert("You bought a Sword! Swords: " + localStorage.swords + "Coins: " + localStorage.coins);
+		alert("You bought a Sword! Coins: " + localStorage.coins + " Swords: " + localStorage.swords);
 	}
 	else
 	{
@@ -56,7 +65,7 @@ function addShield()
 	{
 		localStorage.shields++;
 		localStorage.coins -=80;
-		alert("You bought a Shield! Coins: " + localStorage.coins);
+		alert("You bought a Shield! Coins: " + localStorage.coins + " Shields: " + localStorage.shields);
 	}
 	else
 	{
@@ -69,7 +78,7 @@ function addDrink()
 	{
 		localStorage.drinks++;
 		localStorage.coins -=1000;
-		alert("You bought a Drink! Coins: " + localStorage.coins);
+		alert("You bought a Drink! Coins: " + localStorage.coins + " Drinnks: " + localStorage.drinks);
 	}
 	else
 	{
@@ -89,12 +98,19 @@ function resetAll()
 	localStorage.swords=0;
 	localStorage.shields=0;
 	localStorage.drinks=0;
+	displayAll();
 }
 
-
-function displayCoins()
+function displayAll()
 {
-	alert("You have " + localStorage.coins + " coins!");
+	alert("C " + localStorage.coins +" H "+localStorage.hearts+" SW "+localStorage.swords+" SH "+localStorage.shields+" D "+localStorage.drinks);
 }
+
+function testCase()
+{
+	localStorage.coins = 2000;
+	displayAll();
+}
+
 
 

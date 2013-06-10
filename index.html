@@ -38,6 +38,8 @@
 
 		<a href="CharChooser.html" rel="external" data-role="button" data-transition="flow"> Play </a>	
 		<a href="" data-role="button" onClick="resetAll()"> Reset All </a>
+		<a href="" data-role="button" onClick="testCase()"> Test Case </a>
+		<a href="" data-role="button" onClick="displayAll()"> Display All </a>
 		
 	</div><!-- /content -->
 	
@@ -47,7 +49,7 @@
 			<ul>
 				<li><a href=""><img src="images/jouer.png" height="100" width="100"></a></li>
 				<li><a href="#instruction" data-transition = "flow"><img src="images/instructions.png" height="100" width="200"></a></li>
-				<li><a href="#store" data-transition = "flow"><img src="images/magasine.png" height="100" width="100" onClick="storeInit()"></a></li>
+				<li><a href="#store" data-transition = "flow" onClick="displayAll()"><img src="images/magasine.png" height="100" width="100"></a></li>
 				<li><a href="#about" data-transition="flip"><img src="images/creature.png" height="100" width="200"></a></li>
 			</ul>
 		</div>
@@ -68,8 +70,7 @@
 		<table align = "center" cellpadding="0" border="0">
 			<tr>
 				<td align = "center" colspan="4" id = "coinDisplay">
-					
-					
+					<div id="coinDisplay"></div>				
 				</td>
 			</tr>
 			<tr>
