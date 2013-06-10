@@ -29,19 +29,19 @@ function generateQuestions()
 	{
 		ques[0] = "C'est quoi l'advantage d'un poulie mouble?";
 		ques[1] = "Q'est que notre orelle peut produce?";
-		ques[2] = "quelle planète vivons-nous en?";
+		ques[2] = "Quelle planete vivons-nous en?";
 		ques[3] = "Combien de gram est un nuton?";
 		ques[4] = "Quel pressus est que les chauve souris utiliser pour le navigation?";
-		ques[5] = "Est la lumière invisible quand il se déplace?";
-		ques[6] = "qui est une machine simple?";
+		ques[5] = "Est la lumiere invisible quand il se deplace?";
+		ques[6] = "Qui est une machine simple?";
 		ques[7] = "Pour quoi est que il n'y a pas de son dans l'espace?";
 	}
 	else if(level == 3)
 	{
-		ques[0] = "où sont les baguettes de?";
+		ques[0] = "ou sont les baguettes de?";
 		ques[1] = "ILS de Sont masculin, et Elles de Sont?";
-		ques[2] = "où est la Tour Eiffel?";
-		ques[3] = "Quelle est la capitale du Québec?";
+		ques[2] = "Ou est la Tour Eiffel?";
+		ques[3] = "Quelle est la capitale du Quebec?";
 		ques[4] = "Qu'est-ce 'roi' signifie en anglais?";
 		ques[5] = "Qu'est-ce 'chapeau' signifie en anglais?";
 		ques[6] = "Qu'est-ce 'cheval' signifie en anglais?";
@@ -49,14 +49,14 @@ function generateQuestions()
 	}
 	else if(level == 4)
 	{
-		ques[0] = "Lequel des énoncés suivants est un groupe alimentaire?";
-		ques[1] = "de quelle couleur est une orange?";
-		ques[2] = "l'exercice est bon pour vous?";
-		ques[3] = "quand faut-il se laver les mains?";
-		ques[4] = "combien de portions de viande devriez-vous avoir?";
+		ques[0] = "Lequel des enonces suivants est un groupe alimentaire?";
+		ques[1] = "De quelle couleur est une orange?";
+		ques[2] = "Est l'exercice bon pour vous?";
+		ques[3] = "Quand faut-il se laver les mains?";
+		ques[4] = "Combien de portions de viande devriez-vous avoir?";
 		ques[5] = "Combien de repas faut-il manger par jour?";
-		ques[6] = "Qui voyez-vous quand vous êtes malade?";
-		ques[7] = "si vous êtes malade:";
+		ques[6] = "Qui voyez-vous quand vous etes malade?";
+		ques[7] = "Si vous etes malade:";
 	}
 }
 
@@ -68,32 +68,33 @@ function generateAnswers()
 		sciAns[1] = "Cire";
 		sciAns[2] = "Terre";
 		sciAns[3] = "100";
-		sciAns[4] = "Son";
-		sciAns[5] = "faux";
+		sciAns[4] = "Sonner";
+		sciAns[5] = "Non";
 		sciAns[6] = "Poulie";
-		sciAns[7] = "pas de gaz";
+		sciAns[7] = "Pas de gaz";
 	}
 	else if(level == 3)
 	{
-		sciAns[0] = "France.";
-		sciAns[1] = "Féminin";
+		sciAns[0] = "France";
+		sciAns[1] = "Feminin";
 		sciAns[2] = "Paris";
-		sciAns[3] = "Ville de Québec";
-		sciAns[4] = "king";
-		sciAns[5] = "hat";
-		sciAns[6] = "horse";
-		sciAns[7] = "mouse";
+		sciAns[3] = "Ville de Quebec";
+		sciAns[4] = "King";
+		sciAns[5] = "Hat";
+		sciAns[6] = "Horse";
+		sciAns[7] = "Mouse";
 	}
 	else if(level == 4)
 	{
-		sciAns[0] = "Fruits/Légumes";
-		sciAns[1] = "d'orange";
-		sciAns[2] = "oui";
-		sciAns[3] = "souvent";
+		sciAns[0] = "Fruits/Legumes";
+		sciAns[0] = "Fruits/Legumes";
+		sciAns[1] = "D'orange";
+		sciAns[2] = "Oui";
+		sciAns[3] = "Souvent";
 		sciAns[4] = "1-2";
 		sciAns[5] = "3";
-		sciAns[6] = "le médecin";
-		sciAns[7] = "rester à la maison";
+		sciAns[6] = "Le medecin";
+		sciAns[7] = "Rester a la maison";
 	}
 	sciAns1 = Math.floor(Math.random()*8);
 	sciAns2 = Math.floor(Math.random()*8);

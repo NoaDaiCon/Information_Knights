@@ -3,7 +3,7 @@ function f()
 		var query = window.location.search.substring(1);
 		var vars = query.split('=');
 		character = decodeURIComponent(vars[1]);
-		if(!(character > 1) || !(character < 6))
+		if(!(character > 1) || !(character < 7))
 		{
 			character = 1;
 		}
@@ -31,7 +31,7 @@ function f()
 		y : height-400,
 		width : 200,
 		height : 400,
-		speed: 1
+		speed: 800
 		}
 		hitbox = {
 		x : player.x + 55,
@@ -58,10 +58,15 @@ function f()
 		collision = false;
 		correctAnswers = 0;
 		wrongAnswers = 0;
-		health = 3;
 		level = 1;
 		gaurdian = 1;
 		background = 1;
+		metrics = ctx.measureText(getQuestion());
+		length = metrics.width;
+		localStorage.hearts = 5;
+		localStorage.shields = 1;
+		localStorage.swords = 1;
+		localStorage.potions = 1;
 		
 		image = new Image();
 		xPos = 0;
@@ -80,73 +85,91 @@ function f()
 	
 	function update()
 	{
-			if(correctAnswers >= 1)
+			if(correctAnswers >= 3)
 			{
 				jump();
 				if(player.y < 0-player.height)
 				{
 					level++;
-					gaurdian++;
-					background++;
-					generateScience();
-					answer = getSciAnsNum();
-					correctAnswers = 0;
+						object.speed= object.speed/1.55;
+						gaurdian++;
+					if(level < 5)
+					{
+						background++;
+						generateScience();
+						answer = getSciAnsNum();
+					}
+						correctAnswers = 0;
 				}
 			}
-		if (keys[37])
+		if(!(localStorage.hearts <= 0) && level < 5)
 		{
-			if(player.velX > -player.speed)
+			
+			if (keys[37])
 			{
-				player.velX--;
-			}	
+				if(player.velX > -player.speed)
+				{
+					player.velX--;
+				}	
+				else
+				{
+					player.velX++;
+				}
+			}
+			//if (keys[38] || keys[32])
+			//{
+			//u[p
+			//	jump();			
+			//}
+			if (keys[39])
+			{
+				if(player.velX < player.speed)
+				{
+					player.velX++;
+				}
+				else
+				{
+					player.velX--;
+				}
+			}
+			player.velX *= friction;
+			player.velY += gravity;
+			
+			if(player.velY >= 0)
+			{
+				falling = true;
+			}
 			else
 			{
-				player.velX++;
+				falling = false;
 			}
+			player.x += player.velX;
+			player.y += player.velY;
+			
+			processCollisions();
+					
+			hitbox.x = player.x + 55;
+			hitbox.y = player.y+25;
+				
+			ctx.clearRect(0,0,width,height);
+			ctx.fillStyle = "red";
+			
+			drawBackground();
+			manageHealth();
+			managePowerups();
+			ctx.fillStyle = colour;
+			walk();
+			fps();
 		}
-		//if (keys[38] || keys[32])
-		//{
-		//u[p
-		//	jump();			
-		//}
-		if (keys[39])
+		else if(level >= 5)
 		{
-			if(player.velX < player.speed)
-			{
-				player.velX++;
-			}
-			else
-			{
-				player.velX--;
-			}
-		}
-		player.velX *= friction;
-		player.velY += gravity;
-		
-		if(player.velY >= 0)
-		{
-			falling = true;
+			ctx.drawImage(imageArray["win"],0,0);
 		}
 		else
 		{
-			falling = false;
+			ctx.drawImage(imageArray["gameover"],0,0);
 		}
-		player.x += player.velX;
-		player.y += player.velY;
-		
-		processCollisions();
-				
-		hitbox.x = player.x + 55;
-		hitbox.y = player.y+25;
-			
-		ctx.clearRect(0,0,width,height);
-		ctx.fillStyle = "red";
-		
-		drawBackground();
-		ctx.fillStyle = colour;
-		walk();
-		fps();
-		requestAnimationFrame(update);
+		setTimeout(update, 1000/60);
 	}
 	
 	document.body.addEventListener("keydown", function(e)
@@ -169,46 +192,57 @@ function f()
 	});
 	canvas.addEventListener("mousedown", function(e)
 	{
-		var x = e.clientX;
-		var y = e.clientY;
-		if(y <= 100)
+			var x = e.clientX;
+			var y = e.clientY;
+			
+		if(localStorage.hearts <= 0 || level >= 5)
 		{
-			if(x <= width/4 && answer == 1)
+			window.location = "../index.html";
+		}
+		if(y <= 200 && y >= 150)
+		{
+			if(x <= 60 && x >= 10 && localStorage.potions > 0)
+			{
+				localStorage.hearts = localStorage.hearts + 1;
+				localStorage.potions--;
+			}
+			else if(x <= width-10 && x >= width-60 && localStorage.swords > 0)
 			{
 				correctAnswer();
-			}
-			else if(x > width/4 && x < width/2 && answer == 2)
-			{
-				correctAnswer();
-			}
-			else if(x > width/2 && x <= 3*width/4 && answer == 3)
-			{
-				correctAnswer();
-			}
-			else if(x > 3*width/4 && x <= width && answer == 4)
-			{
-				correctAnswer();
-			}
-			else
-			{
-				wrongAnswers++;
-				health--;
-				alert("ALRT: LOSER");
-			}
-			if(health <= 0)
-			{
-				alert("GAME OER");
-			}
-			if(correctAnswers >= 4)
-			{
-				alert("GAME UP");
 			}
 		}
-		if(y>=height-50 && x <= 100)
+		else
 		{
-		window.location = "../index.html";
+			if(y <= 100 && correctAnswers < 3)
+			{
+				if(x <= width/4 && answer == 1)
+				{
+					correctAnswer();
+				}
+				else if(x > width/4 && x < width/2 && answer == 2)
+				{
+					correctAnswer();
+				}
+				else if(x > width/2 && x <= 3*width/4 && answer == 3)
+				{
+					correctAnswer();
+				}
+				else if(x > 3*width/4 && x <= width && answer == 4)
+				{
+					correctAnswer();
+				}
+				else
+				{
+					wrongAnswers++;
+					localStorage.hearts--;
+				}
+			}
+			if(y>=height-50 && x <= 100)
+			{
+				window.location = "../index.html";
+			}
+				keys[38] = true;
 		}
-			keys[38] = true;
 	});
 	canvas.addEventListener("mouseup", function(e){
 		keys[38] = false;
@@ -302,6 +336,7 @@ function f()
 		}
 	function dead()
 	{
+		localStorage.hearts = 0;
 		if(!collision)
 		{
 			player.dead = false;
@@ -362,6 +397,30 @@ function f()
 				animation = "images2/ansButton";
 				imageArray["button"] = new Image();
 				imageArray["button"].src = animation+".PNG";
+				
+				animation = "images2/heart";
+				imageArray["heart"] = new Image();
+				imageArray["heart"].src = animation+".PNG";
+				
+				animation = "images2/skull";
+				imageArray["skull"] = new Image();
+				imageArray["skull"].src = animation+".PNG";
+				
+				animation = "images2/potion";
+				imageArray["potion"] = new Image();
+				imageArray["potion"].src = animation+".PNG";
+				
+				animation = "images2/sword";
+				imageArray["sword"] = new Image();
+				imageArray["sword"].src = animation+".PNG";
+				
+				animation = "images2/gameover";
+				imageArray["gameover"] = new Image();
+				imageArray["gameover"].src = animation+".PNG";
+				
+				animation = "images2/win";
+				imageArray["win"] = new Image();
+				imageArray["win"].src = animation+".PNG";
 			}
 			if(i < 6)
 			{
@@ -425,13 +484,13 @@ function f()
 		prevTime = curTime;
 		curTime = Date.now();
 		deltaTime = curTime - prevTime;
-		if(curTime - 1000 >= checkSecond)
+		if(curTime - object.speed >= checkSecond)
 		{
 			checkSecond = curTime;
 			deltaTime2 = checkSecond - prevTime;
 			ctx.fillStyle = "12px, Black";
 		}
-		if(curTime - 500 >= checkSecond)
+		if(curTime - object.speed/2 >= checkSecond)
 		{
 			yPos = 0;
 			if(!runonce)
@@ -461,28 +520,37 @@ function f()
 			runonce = false;
 			yPos = 1;
 		}
-		ctx.fillText(1000/deltaTime2, 100, 100);
 		if(showUI)
 		{
 			if(level == 1)
 			{
 				ctx.fillStyle = "black";
 				ctx.font="60px 'Bernard MT Condensed' ";
-				ctx.fillText(getQuestion(),400,height-350);
+			
+				metrics = ctx.measureText(getQuestion());
+				length = metrics.width;
+				ctx.drawImage(imageArray["button"], width-length-100, height-100, length+100, 100);
+				
+				ctx.fillText(getQuestion(),width-length-50,height-25);
 				ctx.fillStyle = "white";
 				ctx.font="60px 'Bernard MT Condensed' ";
-				ctx.fillText(getQuestion(),402,height-350);
+				ctx.fillText(getQuestion(),width-length-48,height-25);
 			}
 			if(level >= 2)
 			{
 				ctx.fillStyle = "black";
 				ctx.font="30px 'Bernard MT Condensed' ";
-				ctx.fillText(getScienceQues(),100,height-350);
+			
+				metrics = ctx.measureText(getScienceQues());
+				length = metrics.width;
+				ctx.drawImage(imageArray["button"], width-length-100, height-100, length+100, 100);
+				
+				ctx.fillText(getScienceQues(),width-length-50,height-40);
 				ctx.fillStyle = "white";
 				ctx.font="30px 'Bernard MT Condensed' ";
-				ctx.fillText(getScienceQues(),102,height-350);
+				ctx.fillText(getScienceQues(),width-length-48,height-40);
 			}
-			
+				
 				ctx.fillText(answer,97+3*width/4, 370);
 			ctx.fillStyle = "black 20px";
 			
@@ -501,7 +569,7 @@ function f()
 			else if(level >= 2)
 			{
 				ctx.font="25px 'Bernard MT Condensed' ";
-				ctx.fillText(getSciAns1(),95, 70);
+				ctx.fillText(getSciAns1(),35, 70);
 			}
 			
 			ctx.fillStyle = "white";
@@ -513,7 +581,7 @@ function f()
 			else if(level >= 2)
 			{
 				ctx.font="25px 'Bernard MT Condensed' ";
-				ctx.fillText(getSciAns1(),97, 70);
+				ctx.fillText(getSciAns1(),37, 70);
 			}
 			
 			ctx.drawImage(imageArray["button"],0+width/4,0,width/4,100);
@@ -528,7 +596,7 @@ function f()
 			else if(level >= 2)
 			{
 				ctx.font="25px 'Bernard MT Condensed' ";
-				ctx.fillText(getSciAns2(),95+width/4, 70);
+				ctx.fillText(getSciAns2(),35+width/4, 70);
 			}
 				
 				ctx.fillStyle = "white";
@@ -540,7 +608,7 @@ function f()
 			else if(level >= 2)
 			{
 				ctx.font="25px 'Bernard MT Condensed' ";
-				ctx.fillText(getSciAns2(),97+width/4, 70);
+				ctx.fillText(getSciAns2(),37+width/4, 70);
 			}
 			ctx.drawImage(imageArray["button"],0+width/2,0,width/4,100);
 			ctx.fillStyle = "pink";
@@ -554,7 +622,7 @@ function f()
 			else if(level >= 2)
 			{
 				ctx.font="25px 'Bernard MT Condensed' ";
-				ctx.fillText(getSciAns3(),95+width/2, 70);
+				ctx.fillText(getSciAns3(),35+width/2, 70);
 			}
 				ctx.fillStyle = "white";
 				ctx.font="60px 'Bernard MT Condensed' ";
@@ -565,7 +633,7 @@ function f()
 			else if(level >= 2)
 			{
 				ctx.font="25px 'Bernard MT Condensed' ";
-				ctx.fillText(getSciAns3(),97+width/2, 70);
+				ctx.fillText(getSciAns3(),37+width/2, 70);
 			}
 			ctx.drawImage(imageArray["button"],3*width/4,0,width/4,100);
 			
@@ -578,7 +646,7 @@ function f()
 			else if(level >= 2)
 			{
 				ctx.font="25px 'Bernard MT Condensed' ";
-				ctx.fillText(getSciAns4(),95+3*width/4, 70);
+				ctx.fillText(getSciAns4(),35+3*width/4, 70);
 			}
 				ctx.fillStyle = "white";
 				ctx.font="60px 'Bernard MT Condensed' ";
@@ -589,13 +657,15 @@ function f()
 			else if(level >= 2)
 			{
 				ctx.font="25px 'Bernard MT Condensed' ";
-				ctx.fillText(getSciAns4(),97+3*width/4, 70);
+				ctx.fillText(getSciAns4(),37+3*width/4, 70);
 			}
 		}
+		ctx.font="25px 'Bernard MT Condensed' ";
+		ctx.fillText("Menu", 25, height-15);
 	}
 	function correctAnswer()
 	{
-		alert("YOU ARE SUPER PLAYER");
+		localStorage.coins+=20;
 		correctAnswers++;
 		object.x = width+object.width;
 		if(level == 1)
@@ -610,8 +680,20 @@ function f()
 			ctx.fillText(answer,97+3*width/4, 370);
 		}
 	}
-	function stringManipulation()
+	function manageHealth()
 	{
-		
+		for(var i = 0; i < localStorage.hearts; i++)
+		{
+			ctx.drawImage(imageArray["heart"], 10+(i*60), height-500, 50, 50);
+		}
+		for(var i = 0; i < 3-correctAnswers; i++)
+		{
+			ctx.drawImage(imageArray["skull"], width-60-(i*60), height-500, 50, 50);
+		}
+	}
+	function managePowerups()
+	{
+		ctx.drawImage(imageArray["potion"], 10, 150, 50, 50);
+		ctx.drawImage(imageArray["sword"], width-60, 150, 50, 50);
 	}
 }
