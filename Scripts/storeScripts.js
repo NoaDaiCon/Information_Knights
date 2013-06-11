@@ -26,8 +26,6 @@ function storeInit()
 	{
 		localStorage.drinks=0;
 	}
-	
-	document.getElementById("coinDisplay").innerHTML = "" + localStorage.coins;
 }
 
 function addHeart()
@@ -37,7 +35,6 @@ function addHeart()
 		localStorage.hearts++;
 		localStorage.coins -=60;
 		alert("You bought a Heart! Coins: " + localStorage.coins + " Hearts: " + localStorage.hearts );
-		displayCoins.innerHTML = localStorage.coins;
 	}
 	else
 	{
@@ -78,7 +75,7 @@ function addDrink()
 	{
 		localStorage.drinks++;
 		localStorage.coins -=1000;
-		alert("You bought a Drink! Coins: " + localStorage.coins + " Drinnks: " + localStorage.drinks);
+		alert("You bought a Drink! Coins: " + localStorage.coins + " Drinks: " + localStorage.drinks);
 	}
 	else
 	{
