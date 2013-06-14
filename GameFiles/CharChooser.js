@@ -1,5 +1,3 @@
-player;
-
 function init()
 {
 	player = 0;

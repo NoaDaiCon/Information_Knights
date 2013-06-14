@@ -63,11 +63,12 @@ function f()
 		background = 1;
 		metrics = ctx.measureText(getQuestion());
 		length = metrics.width;
-		localStorage.hearts = 5;
-		localStorage.shields = 1;
-		localStorage.swords = 1;
-		localStorage.potions = 1;
-		
+		numCoins = localStorage.coins;
+		numCoins = parseInt(localStorage.coins);
+		if(localStorage.hearts < 5)
+		{
+			localStorage.hearts = 5;
+		}
 		image = new Image();
 		xPos = 0;
 		yPos = 0;
@@ -102,9 +103,8 @@ function f()
 						correctAnswers = 0;
 				}
 			}
-		if(!(localStorage.hearts <= 0) && level < 5)
+		if(localStorage.hearts > 0 && level < 5)
 		{
-			
 			if (keys[37])
 			{
 				if(player.velX > -player.speed)
@@ -145,7 +145,6 @@ function f()
 			}
 			player.x += player.velX;
 			player.y += player.velY;
-			
 			processCollisions();
 					
 			hitbox.x = player.x + 55;
@@ -156,9 +155,9 @@ function f()
 			
 			drawBackground();
 			manageHealth();
-			managePowerups();
 			ctx.fillStyle = colour;
 			walk();
+			managePowerups();
 			fps();
 		}
 		else if(level >= 5)
@@ -201,14 +200,16 @@ function f()
 		}
 		if(y <= 200 && y >= 150)
 		{
-			if(x <= 60 && x >= 10 && localStorage.potions > 0)
+			if(x <= 60 && x >= 10 && localStorage.drinks > 0)
 			{
-				localStorage.hearts = localStorage.hearts + 1;
-				localStorage.potions--;
+				localStorage.hearts = localStorage.hearts*2;
+				localStorage.drinks--;
 			}
 			else if(x <= width-10 && x >= width-60 && localStorage.swords > 0)
 			{
 				correctAnswer();
+				correctAnswers--;
+				localStorage.swords--;
 			}
 		}
 		else
@@ -336,9 +337,13 @@ function f()
 		}
 	function dead()
 	{
-		localStorage.hearts = 0;
+		if(localStorage.shields <= 0)
+		{
+			localStorage.hearts = 0;
+		}
 		if(!collision)
 		{
+			localStorage.shields--;
 			player.dead = false;
 			player.width = 225;
 			player.height = 350;
@@ -413,6 +418,14 @@ function f()
 				animation = "images2/sword";
 				imageArray["sword"] = new Image();
 				imageArray["sword"].src = animation+".PNG";
+				
+				animation = "images2/shield";
+				imageArray["shield"] = new Image();
+				imageArray["shield"].src = animation+".PNG";
+				
+				animation = "images2/coin";
+				imageArray["coin"] = new Image();
+				imageArray["coin"].src = animation+".PNG";
 				
 				animation = "images2/gameover";
 				imageArray["gameover"] = new Image();
@@ -551,7 +564,6 @@ function f()
 				ctx.fillText(getScienceQues(),width-length-48,height-40);
 			}
 				
-				ctx.fillText(answer,97+3*width/4, 370);
 			ctx.fillStyle = "black 20px";
 			
 			ctx.drawImage(imageArray["button"], 0,height-50,100,50);
@@ -665,7 +677,23 @@ function f()
 	}
 	function correctAnswer()
 	{
-		localStorage.coins+=20;
+		if(level == 1)
+		{
+			numCoins+=20;
+		}
+		else if(level == 2)
+		{
+			numCoins+=30;
+		}
+		else if(level == 3)
+		{
+			numCoins+=40;
+		}
+		else
+		{
+			numCoins+=50;
+		}
+		localStorage.coins = ""+numCoins;
 		correctAnswers++;
 		object.x = width+object.width;
 		if(level == 1)
@@ -694,6 +722,31 @@ function f()
 	function managePowerups()
 	{
 		ctx.drawImage(imageArray["potion"], 10, 150, 50, 50);
+		ctx.fillStyle = "black";
+		ctx.font="20px 'Bernard MT Condensed' ";
+		ctx.fillText(localStorage.drinks,60, 200);
+		ctx.fillStyle = "white";
+		ctx.font="20px 'Bernard MT Condensed' ";
+		ctx.fillText(localStorage.drinks,62, 200);
+		
 		ctx.drawImage(imageArray["sword"], width-60, 150, 50, 50);
+		ctx.fillStyle = "black";
+		ctx.font="20px 'Bernard MT Condensed' ";
+		ctx.fillText(localStorage.swords,width-70, 200);
+		ctx.fillStyle = "white";
+		ctx.font="20px 'Bernard MT Condensed' ";
+		ctx.fillText(localStorage.swords,width-72, 200);
+		
+		if(localStorage.shields > 0)
+		{
+			ctx.drawImage(imageArray["shield"], player.x+125, player.y+50, 200, 200);
+		}
+		ctx.drawImage(imageArray["coin"], 100, height-35, 25,25);
+		ctx.fillStyle = "black";
+		ctx.font="20px 'Bernard MT Condensed' ";
+		ctx.fillText(localStorage.coins,125, height-15);
+		ctx.fillStyle = "white";
+		ctx.font="20px 'Bernard MT Condensed' ";
+		ctx.fillText(localStorage.coins,127, height-15);
 	}
 }

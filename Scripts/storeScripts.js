@@ -6,26 +6,27 @@ function storeInit()
 	displayShields = document.getElementById("shieldDisplay");
 	displayDrinks = document.getElementById("drinkDisplay");
 	
-	if(localStorage.getItem("coins") === null)
+	if(typeof localStorage.coins != 'number')
 	{
 		localStorage.coins=0;
 	}
-	if (localStorage.getItem("hearts") === null)
+	if (typeof localStorage.hearts != 'number')
 	{
 		localStorage.hearts=0;
 	}
-	if (localStorage.getItem("swords") === null)
+	if (typeof localStorage.swords != 'number')
 	{
 		localStorage.swords=0;
 	}
-	if (localStorage.getItem("shields") === null)
+	if (typeof localStorage.shields != 'number')
 	{
 		localStorage.shields=0;
 	}
-	if (localStorage.getItem("drinks") === null)
+	if (typeof localStorage.drinks != 'number')
 	{
 		localStorage.drinks=0;
 	}
+	displayAll();
 }
 
 function addHeart()

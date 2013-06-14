@@ -1,4 +1,3 @@
-
 <!DOCTYPE html> 
 <html>
 
@@ -10,9 +9,7 @@
 	<script src="Scripts/jquery-1.9.1.js"></script>
 	<script src="Scripts/jquery.mobile-1.3.0.js"></script>
 	<script type="text/javascript" src="Scripts/storeScripts.js"></script>
-	<script>
-	storeInit();
-	</script>
+
 </head> 
 
 <body> 
@@ -21,14 +18,13 @@
 
 	<div data-role="header" data-position="fixed">
 	
+	<h1> Chevaliers Informatiques </h1>
 
-		<h1> Knowledge Guardians </h1>
-		
-	
+	<a href = "#devMenu"> Dev </a>
 	</div><!-- /header -->
 
 	<div data-role="content">
-	
+
 		<table align="center">
 			<tr>
 				<td align="center">
@@ -37,27 +33,24 @@
 			</tr>
 		</table>
 
-		<a href="CharChooser.html" rel="external" data-role="button" data-transition="flow"> Play </a>	
-		<a href="" data-role="button" onClick="resetAll()"> Reset All </a>
-		<a href="" data-role="button" onClick="testCase()"> Test Case </a>
-		<a href="" data-role="button" onClick="displayAll()"> Display All </a>
-		<a href="" data-role="button" onClick="storeInit()"> storeInit() </a>
+		<a href="CharChooser.html" rel="external" data-role="button" data-transition="flow"> Jouer </a>	
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" data-position="fixed">
-	
+
 		<div data-role="navbar">
 			<ul>
 				<li><a href=""><img src="images/jouer.png" height="100" width="100"></a></li>
 				<li><a href="#instruction" data-transition = "flow"><img src="images/instructions.png" height="100" width="200"></a></li>
-				<li><a href="#store" data-transition = "flow" onClick="displayAll()"><img src="images/magasine.png" height="100" width="100"></a></li>
+				<li><a href="#store" data-transition = "flow"><img src="images/magasine.png" height="100" width="100"></a></li>
 				<li><a href="#about" data-transition="flip"><img src="images/creature.png" height="100" width="200"></a></li>
 			</ul>
 		</div>
 	</div>		
-		
+
 	</div><!-- /footer -->
-	
+
 </div><!-- /page -->
 
 <div data-role="page" id = "store">
@@ -67,7 +60,7 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-	
+
 		<table align = "center" cellpadding="0" border="0">
 			<tr>
 				<td align = "center" colspan="4" id = "coinDisplay">
@@ -96,9 +89,9 @@
 			<tr>
 		</table>
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" data-position="fixed">
-	
+
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#menu" data-transition="flow" data-direction="reverse"><img src="images/jouer.png" height="100" width="100"></a></li>
@@ -108,6 +101,26 @@
 			</ul>
 		</div>
 	</div>		
+
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+<div data-role="page" id="devMenu">
+
+	<div data-role="header">
+		<a href = "#menu"> Home </a>
+		<h1> Dev Menu </h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<a href="" data-role="button" onClick="resetAll()"> Reset All </a>
+		<a href="" data-role="button" onClick="storeInit()"> storeInit() </a> 
+		<a href="" data-role="button" onClick="testCase()"> Test Case </a>
+		<a href="" data-role="button" onClick="displayAll()"> Display All </a>
+	</div><!-- /content -->
+	
+	<div data-role="footer">
 		
 	</div><!-- /footer -->
 	
