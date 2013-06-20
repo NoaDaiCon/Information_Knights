@@ -1,6 +1,6 @@
 You are on a quest, for KNOWLEDGE! 
-Knoweldge gaurdians will charge at you while asking you a question. 
-If you get the question right, you will push the gaurdian back and he will take damage, and you will also recieve coinage.
+Knoweldge gaurdians will charge at you while asking you a question. <br>
+If you get the question right, you will push the gaurdian back and he will take damage, and you will also recieve coinage.<br>
 If you get the question wrong you will lose a heart.
 If you run out of hearts or the gaurdian touches you, the game is over.
 If the gaurdian runs out of health, you will fly to the next level.
